@@ -46,11 +46,9 @@ project "Authenticator"
 			"TWONET_ASSERT_ENABLED"	
 		}
 		symbols "On"
+		staticruntime "off"
 
 		prebuildcommands {
-			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libcrypto-3-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
-			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libssl-3-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
-			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn8-2-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
 			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn-9-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}")
 		}
 
@@ -61,8 +59,7 @@ project "Authenticator"
 		prebuildcommands {
 			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn-9-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
 			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libcrypto-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
-			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libssl-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
-			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn8-2-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}")
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libssl-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}")
 		}
 
 	filter "configurations:Dist"

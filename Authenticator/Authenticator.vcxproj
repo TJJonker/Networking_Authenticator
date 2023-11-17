@@ -83,7 +83,7 @@
       <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\Debug-windows-x86_64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -94,10 +94,7 @@
       <AdditionalLibraryDirectories>vendor\MYSQL\Debug-windows-x86_64\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>IF EXIST vendor\MYSQL\Debug-windows-x86_64\lib64\libcrypto-3-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\libcrypto-3-x64.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\libcrypto-3-x64.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)
-IF EXIST vendor\MYSQL\Debug-windows-x86_64\lib64\libssl-3-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\libssl-3-x64.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\libssl-3-x64.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)
-IF EXIST vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn8-2-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)
-IF EXIST vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)</Command>
+      <Command>IF EXIST vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -126,8 +123,7 @@ IF EXIST vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll\ (xcopy
     <PreBuildEvent>
       <Command>IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)
 IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libcrypto-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\libcrypto-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\libcrypto-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)
-IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)
-IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn8-2-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)</Command>
+IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">

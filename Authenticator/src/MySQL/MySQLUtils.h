@@ -12,8 +12,11 @@ public:
 
 	bool IsConnected() const;
 
+	sql::ResultSet* Select(const char* query);
+
 private:
 	sql::mysql::MySQL_Driver* m_Driver = nullptr;
 	sql::Connection* m_Connection = nullptr;
+	sql::Statement* m_Statement = nullptr;
+	sql::ResultSet* m_ResultSet = nullptr;
 };
-
