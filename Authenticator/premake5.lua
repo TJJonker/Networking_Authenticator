@@ -5,8 +5,8 @@ project "Authenticator"
 	targetdir (solutionDir .. "/bin/" .. outputdir .. "/%{prj.name}")
 	objdir (solutionDir .. "/bin-int/" .. outputdir .. "/%{prj.name}")
 
-	-- pchheader "pch.h"
-	-- pchsource "src/pch.cpp" 
+	pchheader "pch.h"
+	pchsource "src/pch.cpp" 
 
 	files {
 		"src/**.h",
@@ -15,6 +15,7 @@ project "Authenticator"
 
 	includedirs {
 		"src",
+		solutionDir .. "%{includeDirs.SPDLOG}",
 		solutionDir .. "%{includeDirs.MYSQL}"
 	}
 
@@ -36,6 +37,10 @@ project "Authenticator"
 		}
 
 		prebuildcommands {
+			("{COPY} vendor/MYSQL/lib64/mysqlcppconn-9-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/lib64/libcrypto-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/lib64/libssl-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/lib64/mysqlcppconn8-2-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}")
 		}
 
 		postbuildcommands {
@@ -43,14 +48,14 @@ project "Authenticator"
 
 
 	filter "configurations:Debug"
-		defines "VOID_DEBUG"
+		defines "TWONET_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
-		defines "VOID_RELEASE"
+		defines "TWONET_RELEASE"
 		optimize "On"
 
 	filter "configurations:Dist"
-		defines "VOID_DIST"
+		defines "TWONET_DIST"
 		optimize "On"
 	

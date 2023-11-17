@@ -12,6 +12,7 @@ solutionDir = "%{wks.location}/"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 includeDirs = {}
+includeDirs["SPDLOG"] = "Authenticator/vendor/SPDLOG/include"
 includeDirs['MYSQL'] = "Authenticator/vendor/MYSQL/include"
 
 libraryDirs = {}

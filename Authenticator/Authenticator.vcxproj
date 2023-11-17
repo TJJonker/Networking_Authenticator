@@ -76,10 +76,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>VOID_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\MYSQL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TWONET_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -92,13 +93,20 @@
       <AdditionalDependencies>mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\MYSQL\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>IF EXIST vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\libcrypto-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\libcrypto-1_1-x64.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\libcrypto-1_1-x64.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\libssl-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>VOID_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\MYSQL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TWONET_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -115,13 +123,20 @@
       <AdditionalDependencies>mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\MYSQL\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>IF EXIST vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\libcrypto-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\libcrypto-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\libcrypto-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\libssl-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>VOID_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\MYSQL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TWONET_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -138,13 +153,26 @@
       <AdditionalDependencies>mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\MYSQL\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>IF EXIST vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\libcrypto-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\libcrypto-1_1-x64.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\libcrypto-1_1-x64.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\libssl-1_1-x64.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\libssl-1_1-x64.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName) &gt; nul)
+IF EXIST vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\lib64\mysqlcppconn8-2-vs14.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName) &gt; nul)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\MySQL\MySQLUtils.cpp" />
-    <ClCompile Include="src\Main.cpp" />
+    <ClInclude Include="src\Debug\Assertion.h" />
+    <ClInclude Include="src\Debug\Log.h" />
+    <ClInclude Include="src\MySQL\MySQLUtils.h" />
+    <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\MySQL\MySQLUtils.h" />
+    <ClCompile Include="src\Debug\Log.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MySQL\MySQLUtils.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
