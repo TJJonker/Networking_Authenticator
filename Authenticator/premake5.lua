@@ -48,7 +48,10 @@ project "Authenticator"
 
 
 	filter "configurations:Debug"
-		defines "TWONET_DEBUG"
+		defines {
+			"TWONET_DEBUG",
+			"TWONET_ASSERT_ENABLED"	
+		}
 		symbols "On"
 
 	filter "configurations:Release"

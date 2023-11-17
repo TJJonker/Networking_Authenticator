@@ -10,8 +10,12 @@ public:
 	void ConnectToDatabase(const char* host, const char* username, const char* password);
 	void Disconnect();
 
+	bool IsConnected() const;
+
 private:
-	sql::mysql::MySQL_Driver* m_Driver;
-	sql::Connection* m_Connection;
+
+
+	sql::mysql::MySQL_Driver* m_Driver = nullptr;
+	sql::Connection* m_Connection = nullptr;
 };
 
