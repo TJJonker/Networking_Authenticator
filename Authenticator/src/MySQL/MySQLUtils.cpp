@@ -17,7 +17,7 @@ void MySQLUtils::ConnectToDatabase(const char* host, const char* username, const
 	try {
 		m_Driver = sql::mysql::get_mysql_driver_instance();
 		m_Connection = m_Driver->connect(host, username, password);
-		TWONET_CORE_TRACE("Succesfully connected to the database.")
+		TWONET_CORE_INFO("Succesfully connected to the database.");
 	}
 	catch (sql::SQLException& e) {
 		TWONET_CORE_ERROR("Could not establish connection with the database: {0}", e.what());
