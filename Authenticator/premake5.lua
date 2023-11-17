@@ -14,13 +14,16 @@ project "Authenticator"
 	}
 
 	includedirs {
-		"src"
+		"src",
+		solutionDir .. "%{includeDirs.MYSQL}"
 	}
 
 	libdirs {
+		solutionDir .. "%{libraryDirs.MYSQL}"
 	}
 
 	links {
+		"mysqlcppconn"
 	}
 
 
