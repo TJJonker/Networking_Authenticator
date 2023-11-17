@@ -13,8 +13,6 @@ public:
 	bool IsConnected() const;
 
 private:
-
-
 	sql::mysql::MySQL_Driver* m_Driver = nullptr;
 	sql::Connection* m_Connection = nullptr;
 };

@@ -36,13 +36,6 @@ project "Authenticator"
 		defines {
 		}
 
-		prebuildcommands {
-			("{COPY} vendor/MYSQL/lib64/mysqlcppconn-9-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
-			("{COPY} vendor/MYSQL/lib64/libcrypto-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
-			("{COPY} vendor/MYSQL/lib64/libssl-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
-			("{COPY} vendor/MYSQL/lib64/mysqlcppconn8-2-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}")
-		}
-
 		postbuildcommands {
 		}
 
@@ -54,9 +47,23 @@ project "Authenticator"
 		}
 		symbols "On"
 
+		prebuildcommands {
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libcrypto-3-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libssl-3-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn8-2-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn-9-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}")
+		}
+
 	filter "configurations:Release"
 		defines "TWONET_RELEASE"
 		optimize "On"
+
+		prebuildcommands {
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn-9-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libcrypto-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/libssl-1_1-x64.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),
+			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn8-2-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}")
+		}
 
 	filter "configurations:Dist"
 		defines "TWONET_DIST"

@@ -1,8 +1,10 @@
 #include "pch.h"
-#include <mysql/jdbc.h>
+#include <MySQL/MySQLUtils.h>
 
 int main() {
+#ifdef TWONET_DEBUG
 	TwoNet::Log::Init();
-
-	TWONET_TRACE("Hello World");
+#endif
+	MySQLUtils db;
+	db.ConnectToDatabase("127.0.0.1:3306", "root", "root");
 }
