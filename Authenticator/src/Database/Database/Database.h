@@ -8,17 +8,13 @@ namespace Database {
 		Database();
 		virtual ~Database();
 
-		void Connect(ConnectionInfo& info) override;
+		void Connect(const ConnectionInfo& info) override;
 		void Disconnect() override;
 
 		bool IsConnected() const override;
 		virtual void SetSchema(const char* schema) override;
 
 		sql::PreparedStatement* PrepareStatement(const char* query) override;
-
-		sql::ResultSet* Select(const char* query) override;
-		int Update(const char* query) override;
-		int Insert(const char* query) override;
 
 	private:
 		sql::mysql::MySQL_Driver* m_Driver = nullptr;

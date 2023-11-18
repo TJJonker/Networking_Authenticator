@@ -16,7 +16,7 @@ namespace Database {
 			delete m_Driver;
 	}
 
-	void Database::Connect(ConnectionInfo& info)
+	void Database::Connect(const ConnectionInfo& info)
 	{
 		TWONET_ASSERT(!m_Connection, "Connection with the database is already established.");
 
@@ -48,22 +48,16 @@ namespace Database {
 
 	sql::PreparedStatement* Database::PrepareStatement(const char* query)
 	{
-		return m_Connection->prepareStatement(query);
-	}
-
-	sql::ResultSet* Database::Select(const char* query)
-	{
-		return m_Statement->executeQuery(query);
-	}
-
-	int Database::Update(const char* query)
-	{
-		return m_Statement->executeUpdate(query);
-	}
-
-	int Database::Insert(const char* query)
-	{
-		return m_Statement->executeUpdate(query);
+		try {
+			return m_Connection->prepareStatement(query);
+		}
+		catch (sql::SQLException& e) {
+			std::cerr << "SQLException: " << e.what() << std::endl;
+			std::cerr << "SQLState: " << e.getSQLState() << std::endl;
+			std::cerr << "VendorError: " << e.getErrorCode() << std::endl;
+			// Handle the exception or rethrow it as needed.
+			throw;
+		}
 	}
 
 	void Database::SetSchema(const char* schema)

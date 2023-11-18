@@ -7,7 +7,7 @@ int main() {
 #endif
 
 	Database::AuthenticatorAPI api({ "127.0.0.1:3306", "root", "root", "gdp"});
-	//api.CreateUser({ "tjj.jonker@gmail.com", "UniqueRandomSalt", "Secret01!" });
+	api.CreateUser({ "tjj.jonker@gmail.com", "UniqueRandomSalt", "Secret01!" });
 
 }
 

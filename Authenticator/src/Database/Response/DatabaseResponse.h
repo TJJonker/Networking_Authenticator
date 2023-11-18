@@ -1,15 +1,8 @@
 #pragma once
-#include "pch.h"
+#include "Database/Response/Status.h"
+#include "Database/Response/FailureReason.h"
 
 namespace Database::Response {
-	enum class Status {
-		OK, Failed
-	};
-
-	enum class FailureReason {
-
-	};
-
 	class DatabaseResponse {
 	public:
 		void SetStatus(Status status);
@@ -18,20 +11,12 @@ namespace Database::Response {
 		void SetFailureReason(FailureReason reason);
 		FailureReason GetFailureReason() const;
 
+		void SetResult(sql::ResultSet* result);
+		sql::ResultSet* GetResult() const;
 
 	private:
-		class Impl;
-
-		std::unique_ptr<Impl> impl;
-
-		DatabaseResponse();
-		~DatabaseResponse();
+		Status m_Status = Status::OK;
+		FailureReason m_Reason = FailureReason::NONE;
+		sql::ResultSet* m_Result;		
 	};
-
-	std::string FailureReasonToString(FailureReason reason) {
-		switch (reason) {
-
-			default: return "Invalid failure reason.";
-		}
-	}
 }

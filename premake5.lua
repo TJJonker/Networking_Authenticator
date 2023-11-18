@@ -20,4 +20,5 @@ libraryDirs = {}
 libraryDirs['MYSQL'] = "Authenticator/vendor/MYSQL/" .. outputdir .. "/lib64/vs14"
 libraryDirs["TWONET"] = "Authenticator/vendor/TwoNet/lib"
 
+include "Authenticator/vendor/TwoNet"
 include "Authenticator"

@@ -1,8 +1,8 @@
 #pragma once
+#include <string>
 
 namespace Database {
-	struct AuthenticateUserData {
+	struct GetUserWithEmailData {
 		std::string Email;
-		std::string HashedPassword;
 	};
 }

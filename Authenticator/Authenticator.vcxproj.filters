@@ -4,6 +4,9 @@
     <Filter Include="Database">
       <UniqueIdentifier>{BAF5A97D-A6C2-0489-CFDB-F230BB073A17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Database\API">
+      <UniqueIdentifier>{A327DD88-8F8A-6C2D-3810-A5E3245238B0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Database\DataStructs">
       <UniqueIdentifier>{DB63FB2C-C7F2-84F6-7011-99F15C7F959C}</UniqueIdentifier>
     </Filter>
@@ -19,21 +22,42 @@
     <Filter Include="Networking">
       <UniqueIdentifier>{6D615D47-5919-9F94-C220-78F0AEF73985}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Networking\Server">
+      <UniqueIdentifier>{F3695F31-5F80-5DC7-A8F7-E8E8144D2E4F}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Database\AuthenticationDatabase.h">
-      <Filter>Database</Filter>
+    <ClInclude Include="src\Database\API\AuthenticatorAPI.h">
+      <Filter>Database\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\DataStructs\AuthenticateUserData.h">
+      <Filter>Database\DataStructs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Database\DataStructs\ConnectionInfo.h">
       <Filter>Database\DataStructs</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\DataStructs\CreateUserData.h">
       <Filter>Database\DataStructs</Filter>
     </ClInclude>
+    <ClInclude Include="src\Database\DataStructs\GetUserWithEmailData.h">
+      <Filter>Database\DataStructs</Filter>
+    </ClInclude>
     <ClInclude Include="src\Database\Database\Database.h">
       <Filter>Database\Database</Filter>
     </ClInclude>
+    <ClInclude Include="src\Database\Database\IDatabase.h">
+      <Filter>Database\Database</Filter>
+    </ClInclude>
     <ClInclude Include="src\Database\Response\DatabaseResponse.h">
+      <Filter>Database\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Database\Response\FailureReason.h">
+      <Filter>Database\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Database\Response\FailureReasonToString.h">
+      <Filter>Database\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Database\Response\Status.h">
       <Filter>Database\Response</Filter>
     </ClInclude>
     <ClInclude Include="src\Debug\Assertion.h">
@@ -42,14 +66,14 @@
     <ClInclude Include="src\Debug\Log.h">
       <Filter>Debug</Filter>
     </ClInclude>
-    <ClInclude Include="src\Networking\Server.h">
-      <Filter>Networking</Filter>
+    <ClInclude Include="src\Networking\Server\Server.h">
+      <Filter>Networking\Server</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Database\AuthenticationDatabase.cpp">
-      <Filter>Database</Filter>
+    <ClCompile Include="src\Database\API\AuthenticatorAPI.cpp">
+      <Filter>Database\API</Filter>
     </ClCompile>
     <ClCompile Include="src\Database\Database\Database.cpp">
       <Filter>Database\Database</Filter>
@@ -61,8 +85,8 @@
       <Filter>Debug</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Networking\Server.cpp">
-      <Filter>Networking</Filter>
+    <ClCompile Include="src\Networking\Server\Server.cpp">
+      <Filter>Networking\Server</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
   </ItemGroup>

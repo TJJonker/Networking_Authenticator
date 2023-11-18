@@ -26,7 +26,9 @@ project "Authenticator"
 	}
 
 	links {
-		"mysqlcppconn"
+		"mysqlcppconn",
+		"ws2_32.lib",
+		"TwoNet.lib"
 	}
 
 

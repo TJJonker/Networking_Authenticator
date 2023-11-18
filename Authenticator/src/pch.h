@@ -8,6 +8,7 @@
 #include <WS2tcpip.h>
 
 #include <TwoNet/Buffer/Buffer.h>
+#include "MySQL/jdbc.h"
 
 #include <memory>
 #include <string>

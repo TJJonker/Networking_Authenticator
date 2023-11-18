@@ -90,7 +90,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\MYSQL\Debug-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
@@ -117,7 +117,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\MYSQL\Release-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
@@ -146,23 +146,29 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\MYSQL\Dist-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Database\AuthenticationDatabase.h" />
+    <ClInclude Include="src\Database\API\AuthenticatorAPI.h" />
     <ClInclude Include="src\Database\DataStructs\AuthenticateUserData.h" />
+    <ClInclude Include="src\Database\DataStructs\ConnectionInfo.h" />
     <ClInclude Include="src\Database\DataStructs\CreateUserData.h" />
+    <ClInclude Include="src\Database\DataStructs\GetUserWithEmailData.h" />
     <ClInclude Include="src\Database\Database\Database.h" />
+    <ClInclude Include="src\Database\Database\IDatabase.h" />
     <ClInclude Include="src\Database\Response\DatabaseResponse.h" />
+    <ClInclude Include="src\Database\Response\FailureReason.h" />
+    <ClInclude Include="src\Database\Response\FailureReasonToString.h" />
+    <ClInclude Include="src\Database\Response\Status.h" />
     <ClInclude Include="src\Debug\Assertion.h" />
     <ClInclude Include="src\Debug\Log.h" />
     <ClInclude Include="src\Networking\Server\Server.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Database\AuthenticationDatabase.cpp" />
+    <ClCompile Include="src\Database\API\AuthenticatorAPI.cpp" />
     <ClCompile Include="src\Database\Database\Database.cpp" />
     <ClCompile Include="src\Database\Response\DatabaseResponse.cpp" />
     <ClCompile Include="src\Debug\Log.cpp" />
