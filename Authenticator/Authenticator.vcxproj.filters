@@ -1,32 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Database">
+      <UniqueIdentifier>{BAF5A97D-A6C2-0489-CFDB-F230BB073A17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Database\DataStructs">
+      <UniqueIdentifier>{DB63FB2C-C7F2-84F6-7011-99F15C7F959C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Database\Database">
+      <UniqueIdentifier>{DE712A5D-4A88-28F3-93FF-B314FF54F97A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Database\Response">
+      <UniqueIdentifier>{58A86E7B-C4BE-6C11-0D36-F832798B3D99}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{0C95060D-78A9-2EBE-412B-D21DADFE2AEF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MySQL">
-      <UniqueIdentifier>{9B24B40D-0739-DCBE-D0BA-7F1E3C8ED8EF}</UniqueIdentifier>
+    <Filter Include="Networking">
+      <UniqueIdentifier>{6D615D47-5919-9F94-C220-78F0AEF73985}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Database\AuthenticationDatabase.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Database\DataStructs\AuthenticateUserData.h">
+      <Filter>Database\DataStructs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Database\DataStructs\CreateUserData.h">
+      <Filter>Database\DataStructs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Database\Database\Database.h">
+      <Filter>Database\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Database\Response\DatabaseResponse.h">
+      <Filter>Database\Response</Filter>
+    </ClInclude>
     <ClInclude Include="src\Debug\Assertion.h">
       <Filter>Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\Debug\Log.h">
       <Filter>Debug</Filter>
     </ClInclude>
-    <ClInclude Include="src\MySQL\MySQLUtils.h">
-      <Filter>MySQL</Filter>
+    <ClInclude Include="src\Networking\Server.h">
+      <Filter>Networking</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Database\AuthenticationDatabase.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database\Database\Database.cpp">
+      <Filter>Database\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database\Response\DatabaseResponse.cpp">
+      <Filter>Database\Response</Filter>
+    </ClCompile>
     <ClCompile Include="src\Debug\Log.cpp">
       <Filter>Debug</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\MySQL\MySQLUtils.cpp">
-      <Filter>MySQL</Filter>
+    <ClCompile Include="src\Networking\Server.cpp">
+      <Filter>Networking</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
   </ItemGroup>
