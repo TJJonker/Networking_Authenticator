@@ -13,7 +13,6 @@ namespace Database {
 		AuthenticatorAPI(const ConnectionInfo& info);
 
 		Response::DatabaseResponse CreateUser(const CreateUserData& processedData);
-		Response::DatabaseResponse AuthenticateUser(const AuthenticateUserData& processedData);
 		Response::DatabaseResponse GetUserWithEmail(const GetUserWithEmailData& processedData);
 	
 	private:

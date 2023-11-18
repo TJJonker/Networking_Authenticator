@@ -74,7 +74,7 @@ namespace TwoNet {
 		return nullptr;
 	}
 
-	const char* Buffer::GetBufferData()
+	const char* Buffer::GetBufferData() const
 	{
 		return m_Buffer.data();
 	}
@@ -90,11 +90,6 @@ namespace TwoNet {
 	{
 		if (m_WriteIndex + size > m_Buffer.size())
 			m_Buffer.resize(m_WriteIndex + size);
-	}
-
-	size_t Buffer::GetSize()
-	{
-		return m_WriteIndex;
 	}
 
 	void Buffer::Clear()

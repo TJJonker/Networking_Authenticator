@@ -39,18 +39,13 @@ namespace Database {
 		return Update(statement);
 	}
 
-	Response::DatabaseResponse AuthenticatorAPI::AuthenticateUser(const AuthenticateUserData& processedData)
-	{
-		TWONET_ASSERT(false, "Not implemented");
-		sql::PreparedStatement* statement = m_Database->PrepareStatement("");
-		return {};
-	}
-
 	Response::DatabaseResponse AuthenticatorAPI::GetUserWithEmail(const GetUserWithEmailData& processedData)
 	{
-		TWONET_ASSERT(false, "Not implemented");
-		sql::PreparedStatement* statement = m_Database->PrepareStatement("");
-		return {};
+		static std::string query = "SELECT * FROM web_auth WHERE email = ?";
+		sql::PreparedStatement* statement = m_Database->PrepareStatement(query.c_str());
+
+		statement->setString(1, processedData.Email);
+		return Select(statement);
 	}
 
 	Response::DatabaseResponse AuthenticatorAPI::Select(sql::PreparedStatement* statement)

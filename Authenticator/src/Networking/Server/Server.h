@@ -16,6 +16,8 @@ namespace Networking {
 
 		void SetOnConnectionDataReceived(DataFunction function);
 		void SetOnDataReceived(DataFunction function);
+
+		bool SendData(SOCKET socket, const TwoNet::Buffer& buffer);
 	private:
 		class Impl;
 		std::unique_ptr<Impl> impl;

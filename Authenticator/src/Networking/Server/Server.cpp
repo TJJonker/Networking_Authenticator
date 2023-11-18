@@ -101,6 +101,18 @@ namespace Networking {
 			m_OnDataReceived = function;
 		}
 
+		bool SendData(SOCKET socket, const TwoNet::Buffer& buffer) {
+			int result;
+
+			result = send(socket, buffer.GetBufferData(), buffer.GetSize(), 0);
+			if (result == SOCKET_ERROR) {
+				TWONET_CORE_WARN("Error while sending data.");
+				return false;
+			}
+
+			return true;
+		}
+
 	private:
 		SOCKET m_ListenSocket = INVALID_SOCKET;
 		addrinfo* m_ServerInfo = nullptr;
@@ -205,6 +217,11 @@ namespace Networking {
 	void Server::SetOnDataReceived(DataFunction function) 
 	{ 
 		impl->SetOnDataReceived(function); 
+	}
+
+	bool Server::SendData(SOCKET socket, const TwoNet::Buffer& buffer)
+	{
+		return impl->SendData(socket, buffer);
 	}
 
 	Server::Server()

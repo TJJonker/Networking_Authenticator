@@ -22,12 +22,12 @@ namespace TwoNet {
 		void SerializeData(const char* data, size_t dataSize);
 		const char* DeserializeData(size_t dataSize);
 
-		const char* GetBufferData();
+		const char* GetBufferData() const;
 		void WriteBuffer(const void* data, size_t dataSize);
 		void EnsureCapacity(size_t value);
 
-		size_t GetSize();
-		size_t GetBufferSize() { return m_Buffer.size(); }
+		size_t GetSize() const { return m_WriteIndex; }
+		size_t GetBufferSize() const { return m_Buffer.size(); }
 		void Clear();
 	};
 }
