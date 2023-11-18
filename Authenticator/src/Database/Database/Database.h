@@ -1,23 +1,24 @@
 #pragma once
-#include <MySQL/jdbc.h>
+#include "Database/Database/IDatabase.h"
 
 namespace Database {
-	class Database
+	class Database : public IDatabase
 	{
 	public:
 		Database();
-		~Database();
+		virtual ~Database();
 
-		void ConnectToDatabase(const char* host, const char* username, const char* password);
-		void Disconnect();
+		void Connect(ConnectionInfo& info) override;
+		void Disconnect() override;
 
-		bool IsConnected() const;
+		bool IsConnected() const override;
+		virtual void SetSchema(const char* schema) override;
 
-		sql::PreparedStatement* PrepareStatement(const char* query);
+		sql::PreparedStatement* PrepareStatement(const char* query) override;
 
-		sql::ResultSet* Select(const char* query);
-		int Update(const char* query);
-		int Insert(const char* query);
+		sql::ResultSet* Select(const char* query) override;
+		int Update(const char* query) override;
+		int Insert(const char* query) override;
 
 	private:
 		sql::mysql::MySQL_Driver* m_Driver = nullptr;

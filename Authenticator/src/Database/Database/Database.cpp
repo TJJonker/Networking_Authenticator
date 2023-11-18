@@ -16,16 +16,16 @@ namespace Database {
 			delete m_Driver;
 	}
 
-	void Database::ConnectToDatabase(const char* host, const char* username, const char* password)
+	void Database::Connect(ConnectionInfo& info)
 	{
 		TWONET_ASSERT(!m_Connection, "Connection with the database is already established.");
 
 		try {
 			m_Driver = sql::mysql::get_mysql_driver_instance();
-			m_Connection = m_Driver->connect(host, username, password);
+			m_Connection = m_Driver->connect(info.Host, info.Username, info.Password);
 			m_Statement = m_Connection->createStatement();
 			TWONET_CORE_INFO("Succesfully connected to the database.");
-			m_Connection->setSchema("gdp");
+			SetSchema(info.Schema.c_str());
 			TWONET_CORE_INFO("Succesfully set schema");
 
 		}
@@ -64,5 +64,10 @@ namespace Database {
 	int Database::Insert(const char* query)
 	{
 		return m_Statement->executeUpdate(query);
+	}
+
+	void Database::SetSchema(const char* schema)
+	{
+		m_Connection->setSchema(schema);
 	}
 }
