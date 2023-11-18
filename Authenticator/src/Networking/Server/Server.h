@@ -8,6 +8,9 @@ namespace Networking {
 	class Server
 	{
 	public:
+		Server();
+		~Server();
+
 		bool Intialize(const char* ip, const char* port);
 		void Terminate();
 
@@ -21,8 +24,5 @@ namespace Networking {
 	private:
 		class Impl;
 		std::unique_ptr<Impl> impl;
-
-		Server();
-		~Server();
 	};
 }

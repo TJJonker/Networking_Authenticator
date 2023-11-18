@@ -32,4 +32,14 @@ namespace Database::Response {
 	{
 		return m_Result;
 	}
+
+	void DatabaseResponse::SetRequestID(long requestID)
+	{
+		m_RequestID = requestID;
+	}
+
+	long DatabaseResponse::GetRequestID() const
+	{
+		return m_RequestID;
+	}
 }

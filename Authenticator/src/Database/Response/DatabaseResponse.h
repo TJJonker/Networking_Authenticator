@@ -14,7 +14,11 @@ namespace Database::Response {
 		void SetResult(sql::ResultSet* result);
 		sql::ResultSet* GetResult() const;
 
+		void SetRequestID(long requestID);
+		long GetRequestID() const;
+
 	private:
+		long m_RequestID;
 		Status m_Status = Status::OK;
 		FailureReason m_Reason = FailureReason::NONE;
 		sql::ResultSet* m_Result;		
