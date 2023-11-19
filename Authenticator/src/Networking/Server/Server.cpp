@@ -79,7 +79,7 @@ namespace Networking {
 
 				TwoNet::Buffer buffer;
 				if (m_OnDataReceived && ReceiveData(buffer, socket))
-					m_OnDataReceived(buffer);
+					m_OnDataReceived(buffer, socket);
 			}
 		}
 
@@ -93,9 +93,9 @@ namespace Networking {
 			WSACleanup();
 		}
 
-		void SetOnConnectionDataReceived(DataFunction function)
+		void SetOnHandshake(DataFunction function)
 		{ 
-			m_OnConnectionDataReceived = function; 
+			m_OnHandShake = function; 
 		}
 		void SetOnDataReceived(DataFunction function) {
 			m_OnDataReceived = function;
@@ -120,7 +120,7 @@ namespace Networking {
 		fd_set m_Readfds = {};
 		timeval m_Timeout = {};
 
-		DataFunction m_OnConnectionDataReceived;
+		DataFunction m_OnHandShake;
 		DataFunction m_OnDataReceived;
 
 		void HandleConnectionRequest() {
@@ -142,8 +142,8 @@ namespace Networking {
 
 			// Check for additional data
 			TwoNet::Buffer buffer;
-			if (m_OnConnectionDataReceived && ReceiveData(buffer, newfd))
-				m_OnConnectionDataReceived(buffer);
+			if (m_OnHandShake && ReceiveData(buffer, newfd))
+				m_OnHandShake(buffer, newfd);
 
 			TWONET_CORE_TRACE("Connection made.");
 		}
@@ -209,9 +209,9 @@ namespace Networking {
 		impl->CheckForIncomingData(sockets);
 	}
 
-	void Server::SetOnConnectionDataReceived(DataFunction function) 
+	void Server::SetOnHandshake(DataFunction function) 
 	{ 
-		impl->SetOnConnectionDataReceived(function); 
+		impl->SetOnHandshake(function); 
 	}
 
 	void Server::SetOnDataReceived(DataFunction function) 

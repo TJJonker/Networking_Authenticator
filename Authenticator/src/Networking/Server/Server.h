@@ -3,7 +3,7 @@
 
 namespace Networking {
 
-	using DataFunction = std::function<void(TwoNet::Buffer& buffer)>;
+	using DataFunction = std::function<void(TwoNet::Buffer& buffer, SOCKET socket)>;
 
 	class Server
 	{
@@ -17,7 +17,7 @@ namespace Networking {
 		void ListenForConnections();
 		void CheckForIncomingData(std::vector<SOCKET> sockets);
 
-		void SetOnConnectionDataReceived(DataFunction function);
+		void SetOnHandshake(DataFunction function);
 		void SetOnDataReceived(DataFunction function);
 
 		bool SendData(SOCKET socket, const TwoNet::Buffer& buffer);
