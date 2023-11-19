@@ -16,8 +16,7 @@ namespace Database {
 		
 	private:
 		Response::DatabaseResponse ParseToObject(Database::Authenticate authenticate, TwoNet::Buffer& buffer);
-
-		Response::DatabaseResponse HashPassword(std::string rawPassword, std::string salt = "");
+		unsigned char* HashPassword(std::string rawPassword, std::string salt);
 
 	private:
 		const AuthenticatorAPI& m_API;

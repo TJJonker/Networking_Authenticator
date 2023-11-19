@@ -6,7 +6,6 @@ namespace Database {
 	{
 		Response::DatabaseResponse response;
 
-
 		// Parse to Authenticate object
 		Database::Authenticate authenticate;
 		response = ParseToObject(authenticate, buffer);
@@ -16,21 +15,30 @@ namespace Database {
 		GetUserWithEmailData userData{ authenticate.email() };
 		response = m_API.GetUserWithEmail(userData);
 		CHECK(response);
+
+		// Check if row is found.
+		if (!response.GetResult()->next()) {
+			response.SetFailureReason(Response::FailureReason::INVALID_CREDENTIALS);
+			return response;
+		}
+
+		// Save result
 		sql::ResultSet* result = response.GetResult();
 
 		// Hash password
-
+		unsigned char* hashedPassword = HashPassword(authenticate.password(), result->getString(4).c_str());
 
 		// Compare password
-
+		int compareResult = hashedPassword == (unsigned char*) result->getString(5).c_str();
 
 		// Return data
+		if (!compareResult) {
+			response.SetFailureReason(Response::FailureReason::INVALID_CREDENTIALS);
+			return response;
+		}
 
-
-
-		// Insert code here
-		TWONET_CORE_ASSERT(false, "Not implemented.");
-		return {};
+		response.SetResult(result);
+		return response;
 	}
 
 	Response::DatabaseResponse AuthenticateUserCommand::ParseToObject(Database::Authenticate authenticate, TwoNet::Buffer& buffer)
@@ -39,9 +47,11 @@ namespace Database {
 		return ParseTo<Database::Authenticate>(rawData, authenticate);
 	}
 
-	Response::DatabaseResponse AuthenticateUserCommand::HashPassword(std::string rawPassword, std::string salt)
+	unsigned char* AuthenticateUserCommand::HashPassword(std::string rawPassword, std::string salt)
 	{
-		Response::DatabaseResponse response;
-
+		std::string saltedPassword = salt + rawPassword;
+		unsigned char hashedPassword[SHA256_DIGEST_LENGTH];
+		SHA256((unsigned char*)saltedPassword.c_str(), saltedPassword.length(), hashedPassword);
+		return hashedPassword;
 	}
 }

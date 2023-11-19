@@ -41,7 +41,7 @@ namespace Database {
 
 	Response::DatabaseResponse AuthenticatorAPI::GetUserWithEmail(const GetUserWithEmailData& processedData) const
 	{
-		static std::string query = "SELECT * FROM web_auth WHERE email = ?";
+		static std::string query = "SELECT user.last_login, user.creation_date, web_auth.email, web_auth.salt, web_auth.hashed_password FROM user LEFT JOIN web_auth ON user.id = web_auth.userID WHERE email = ? ";
 		sql::PreparedStatement* statement = m_Database->PrepareStatement(query.c_str());
 
 		statement->setString(1, processedData.Email);

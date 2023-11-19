@@ -23,19 +23,23 @@ project "Authenticator"
 		solutionDir .. "%{includeDirs.MYSQL}",
 		solutionDir .. "%{includeDirs.TWONET}",
 		solutionDir .. "%{includeDirs.PROTOBUFF}",
-		solutionDir .. "%{includeDirs.PROTOS}"
+		solutionDir .. "%{includeDirs.PROTOS}",
+		solutionDir .. "%{includeDirs.OPENSSL}"
 	}
 
 	libdirs {
 		solutionDir .. "%{libraryDirs.MYSQL}",
 		solutionDir .. "%{libraryDirs.TWONET}",
-		solutionDir .. "%{libraryDirs.PROTOBUFF}"
+		solutionDir .. "%{libraryDirs.PROTOBUFF}",
+		solutionDir .. "%{libraryDirs.OPENSSL}"
 	}
 
 	links {
 		"mysqlcppconn",
 		"ws2_32.lib",
-		"TwoNet.lib"
+		"TwoNet.lib",
+		"libcrypto.lib",
+		"libssl.lib"
 	}
 
 
