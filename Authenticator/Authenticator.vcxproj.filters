@@ -1,114 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Commands">
-      <UniqueIdentifier>{17269CB7-03F3-F6C2-2C0C-E56A18382C51}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Database">
-      <UniqueIdentifier>{BAF5A97D-A6C2-0489-CFDB-F230BB073A17}</UniqueIdentifier>
+    <Filter Include="src\Commands">
+      <UniqueIdentifier>{0E2916E8-FA8B-A58C-A311-DE428F53710F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Database\API">
-      <UniqueIdentifier>{A327DD88-8F8A-6C2D-3810-A5E3245238B0}</UniqueIdentifier>
+    <Filter Include="src\Database">
+      <UniqueIdentifier>{B1F823AE-9D5B-B352-46E1-EB0832237FD5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Database\DataStructs">
-      <UniqueIdentifier>{DB63FB2C-C7F2-84F6-7011-99F15C7F959C}</UniqueIdentifier>
+    <Filter Include="src\Database\API">
+      <UniqueIdentifier>{1ACEFD9B-06C7-1CEE-2FF9-01731B51FCF9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Database\Database">
-      <UniqueIdentifier>{DE712A5D-4A88-28F3-93FF-B314FF54F97A}</UniqueIdentifier>
+    <Filter Include="src\Database\DataStructs">
+      <UniqueIdentifier>{52913A37-3EB6-89B7-6701-6F47538588D5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Database\Response">
-      <UniqueIdentifier>{58A86E7B-C4BE-6C11-0D36-F832798B3D99}</UniqueIdentifier>
+    <Filter Include="src\Database\Database">
+      <UniqueIdentifier>{B5BA38B2-2127-F4AC-EA1A-8C0A56461615}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Debug">
-      <UniqueIdentifier>{0C95060D-78A9-2EBE-412B-D21DADFE2AEF}</UniqueIdentifier>
+    <Filter Include="src\Database\Response">
+      <UniqueIdentifier>{2FF17CD0-9B5D-38CB-6451-D028D07C5A33}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Networking">
-      <UniqueIdentifier>{6D615D47-5919-9F94-C220-78F0AEF73985}</UniqueIdentifier>
+    <Filter Include="src\Debug">
+      <UniqueIdentifier>{63A3C3B2-CF0D-7829-184C-29CF84F5557E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Networking\Server">
-      <UniqueIdentifier>{F3695F31-5F80-5DC7-A8F7-E8E8144D2E4F}</UniqueIdentifier>
+    <Filter Include="src\Networking">
+      <UniqueIdentifier>{24FE637E-10CC-5784-F95F-C8AAE5CC33E9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Networking\ServerManager">
-      <UniqueIdentifier>{6E81D264-5AA6-21E5-83F1-06756F752003}</UniqueIdentifier>
+    <Filter Include="src\Networking\Server">
+      <UniqueIdentifier>{CAB26D86-361F-2981-FF12-C1DE6B3E4BE9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Networking\ServerManager">
+      <UniqueIdentifier>{659249AD-514D-3959-FA04-B2A3E69E83E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ProtoBuff">
+      <UniqueIdentifier>{D9413AAE-C53A-5900-EE6C-3E85DAC4380C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ProtoBuff\Protos_Build">
+      <UniqueIdentifier>{BE72C8B6-2A8B-AFE0-F337-3F7A5F0F447A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ProtoBuff\Protos_Build\Authenticate">
+      <UniqueIdentifier>{ECF0C989-D858-9057-41C4-A46D2D4BA743}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ProtoBuff\Protos_Build\AuthenticateResponse">
+      <UniqueIdentifier>{1BFFAC6F-0793-A217-7057-FCCB5C0ADD09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ProtoBuff\Protos_Build\CreateAccount">
+      <UniqueIdentifier>{AE3A5C03-1AA0-EF89-A378-91620FDDE4F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ProtoBuff\Protos_Build\CreateAccountResponse">
+      <UniqueIdentifier>{DDEAC51D-49FC-6DC4-D24D-00043E5EF7FD}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Commands\AuthenticateUserCommand.h">
-      <Filter>Commands</Filter>
+      <Filter>src\Commands</Filter>
     </ClInclude>
     <ClInclude Include="src\Commands\CreatUserCommand.h">
-      <Filter>Commands</Filter>
+      <Filter>src\Commands</Filter>
     </ClInclude>
     <ClInclude Include="src\Commands\IDatabaseCommand.h">
-      <Filter>Commands</Filter>
+      <Filter>src\Commands</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\API\AuthenticatorAPI.h">
-      <Filter>Database\API</Filter>
+      <Filter>src\Database\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\DataStructs\AuthenticateUserData.h">
-      <Filter>Database\DataStructs</Filter>
+      <Filter>src\Database\DataStructs</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\DataStructs\ConnectionInfo.h">
-      <Filter>Database\DataStructs</Filter>
+      <Filter>src\Database\DataStructs</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\DataStructs\CreateUserData.h">
-      <Filter>Database\DataStructs</Filter>
+      <Filter>src\Database\DataStructs</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\DataStructs\GetUserWithEmailData.h">
-      <Filter>Database\DataStructs</Filter>
+      <Filter>src\Database\DataStructs</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\Database\Database.h">
-      <Filter>Database\Database</Filter>
+      <Filter>src\Database\Database</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\Database\IDatabase.h">
-      <Filter>Database\Database</Filter>
+      <Filter>src\Database\Database</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\Response\DatabaseResponse.h">
-      <Filter>Database\Response</Filter>
+      <Filter>src\Database\Response</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\Response\FailureReason.h">
-      <Filter>Database\Response</Filter>
+      <Filter>src\Database\Response</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\Response\FailureReasonToString.h">
-      <Filter>Database\Response</Filter>
+      <Filter>src\Database\Response</Filter>
     </ClInclude>
     <ClInclude Include="src\Database\Response\Status.h">
-      <Filter>Database\Response</Filter>
+      <Filter>src\Database\Response</Filter>
     </ClInclude>
     <ClInclude Include="src\Debug\Assertion.h">
-      <Filter>Debug</Filter>
+      <Filter>src\Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\Debug\Log.h">
-      <Filter>Debug</Filter>
+      <Filter>src\Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\Networking\Server\Server.h">
-      <Filter>Networking\Server</Filter>
+      <Filter>src\Networking\Server</Filter>
     </ClInclude>
     <ClInclude Include="src\Networking\ServerManager\ServerManager.h">
-      <Filter>Networking\ServerManager</Filter>
+      <Filter>src\Networking\ServerManager</Filter>
     </ClInclude>
-    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\pch.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\ProtoBuff\Protos_Build\Authenticate\Authenticate.pb.h">
+      <Filter>vendor\ProtoBuff\Protos_Build\Authenticate</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\ProtoBuff\Protos_Build\AuthenticateResponse\AuthenticateResponse.pb.h">
+      <Filter>vendor\ProtoBuff\Protos_Build\AuthenticateResponse</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\ProtoBuff\Protos_Build\CreateAccount\CreateAccount.pb.h">
+      <Filter>vendor\ProtoBuff\Protos_Build\CreateAccount</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\ProtoBuff\Protos_Build\CreateAccountResponse\CreateAccountResponse.pb.h">
+      <Filter>vendor\ProtoBuff\Protos_Build\CreateAccountResponse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Database\API\AuthenticatorAPI.cpp">
-      <Filter>Database\API</Filter>
+      <Filter>src\Database\API</Filter>
     </ClCompile>
     <ClCompile Include="src\Database\Database\Database.cpp">
-      <Filter>Database\Database</Filter>
+      <Filter>src\Database\Database</Filter>
     </ClCompile>
     <ClCompile Include="src\Database\Response\DatabaseResponse.cpp">
-      <Filter>Database\Response</Filter>
+      <Filter>src\Database\Response</Filter>
     </ClCompile>
     <ClCompile Include="src\Debug\Log.cpp">
-      <Filter>Debug</Filter>
+      <Filter>src\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\Networking\Server\Server.cpp">
-      <Filter>Networking\Server</Filter>
+      <Filter>src\Networking\Server</Filter>
     </ClCompile>
     <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp">
-      <Filter>Networking\ServerManager</Filter>
+      <Filter>src\Networking\ServerManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\ProtoBuff\Protos_Build\Authenticate\Authenticate.pb.cc">
+      <Filter>vendor\ProtoBuff\Protos_Build\Authenticate</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\ProtoBuff\Protos_Build\AuthenticateResponse\AuthenticateResponse.pb.cc">
+      <Filter>vendor\ProtoBuff\Protos_Build\AuthenticateResponse</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\ProtoBuff\Protos_Build\CreateAccount\CreateAccount.pb.cc">
+      <Filter>vendor\ProtoBuff\Protos_Build\CreateAccount</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\ProtoBuff\Protos_Build\CreateAccountResponse\CreateAccountResponse.pb.cc">
+      <Filter>vendor\ProtoBuff\Protos_Build\CreateAccountResponse</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

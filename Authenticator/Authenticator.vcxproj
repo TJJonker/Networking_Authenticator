@@ -109,7 +109,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -138,7 +138,7 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -170,6 +170,10 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
     <ClInclude Include="src\Networking\Server\Server.h" />
     <ClInclude Include="src\Networking\ServerManager\ServerManager.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="vendor\ProtoBuff\Protos_Build\Authenticate\Authenticate.pb.h" />
+    <ClInclude Include="vendor\ProtoBuff\Protos_Build\AuthenticateResponse\AuthenticateResponse.pb.h" />
+    <ClInclude Include="vendor\ProtoBuff\Protos_Build\CreateAccount\CreateAccount.pb.h" />
+    <ClInclude Include="vendor\ProtoBuff\Protos_Build\CreateAccountResponse\CreateAccountResponse.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Database\API\AuthenticatorAPI.cpp" />
@@ -182,6 +186,10 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="vendor\ProtoBuff\Protos_Build\Authenticate\Authenticate.pb.cc" />
+    <ClCompile Include="vendor\ProtoBuff\Protos_Build\AuthenticateResponse\AuthenticateResponse.pb.cc" />
+    <ClCompile Include="vendor\ProtoBuff\Protos_Build\CreateAccount\CreateAccount.pb.cc" />
+    <ClCompile Include="vendor\ProtoBuff\Protos_Build\CreateAccountResponse\CreateAccountResponse.pb.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

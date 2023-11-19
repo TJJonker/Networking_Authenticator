@@ -2,6 +2,7 @@ project "Authenticator"
 	kind "ConsoleApp"
 	language "C++"
 	dependson "TwoNet"
+	staticruntime "Off"
 
 	targetdir (solutionDir .. "/bin/" .. outputdir .. "/%{prj.name}")
 	objdir (solutionDir .. "/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -11,7 +12,9 @@ project "Authenticator"
 
 	files {
 		"src/**.h",
-		"src/**.cpp"
+		"src/**.cpp",
+		"vendor/ProtoBuff/Protos_Build/**.cc",
+		"vendor/ProtoBuff/Protos_Build/**.h"
 	}
 
 	includedirs {
@@ -39,7 +42,6 @@ project "Authenticator"
 	filter "system:windows"
 		cppdialect "C++17"
 		systemversion "latest"
-		staticruntime "on"
 
 		defines {
 		}
@@ -54,7 +56,6 @@ project "Authenticator"
 			"TWONET_ASSERT_ENABLED"
 		}
 		symbols "On"
-		staticruntime "off"
 
 		links {
 			"libprotobufd.lib"

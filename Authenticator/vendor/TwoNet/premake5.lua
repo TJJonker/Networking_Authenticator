@@ -23,7 +23,7 @@ project "TwoNet"
 	filter "system:windows"
 		cppdialect "C++17"
 		systemversion "latest"
-		staticruntime "on"
+		staticruntime "Off"
 
 	filter "configurations:Debug"
 		symbols "On"
