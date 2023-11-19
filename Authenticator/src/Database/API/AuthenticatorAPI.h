@@ -12,14 +12,14 @@ namespace Database {
 	public:
 		AuthenticatorAPI(const ConnectionInfo& info);
 
-		Response::DatabaseResponse CreateUser(const CreateUserData& processedData);
-		Response::DatabaseResponse GetUserWithEmail(const GetUserWithEmailData& processedData);
+		Response::DatabaseResponse CreateUser(const CreateUserData& processedData) const;
+		Response::DatabaseResponse GetUserWithEmail(const GetUserWithEmailData& processedData) const;
 	
 	private:
-		Response::DatabaseResponse Select(sql::PreparedStatement* statement);
-		Response::DatabaseResponse Update(sql::PreparedStatement* statement);
+		Response::DatabaseResponse Select(sql::PreparedStatement* statement) const;
+		Response::DatabaseResponse Update(sql::PreparedStatement* statement) const;
 
-		Response::DatabaseResponse DatabaseCheck();
+		Response::DatabaseResponse DatabaseCheck() const;
 	private:
 		IDatabase* m_Database = nullptr;
 	};

@@ -9,7 +9,7 @@ namespace Database {
 		m_Database->Connect(info);
 	}
 
-	Response::DatabaseResponse AuthenticatorAPI::CreateUser(const CreateUserData& processedData)
+	Response::DatabaseResponse AuthenticatorAPI::CreateUser(const CreateUserData& processedData) const
 	{
 		Response::DatabaseResponse response;
 		sql::PreparedStatement* statement;
@@ -39,7 +39,7 @@ namespace Database {
 		return Update(statement);
 	}
 
-	Response::DatabaseResponse AuthenticatorAPI::GetUserWithEmail(const GetUserWithEmailData& processedData)
+	Response::DatabaseResponse AuthenticatorAPI::GetUserWithEmail(const GetUserWithEmailData& processedData) const
 	{
 		static std::string query = "SELECT * FROM web_auth WHERE email = ?";
 		sql::PreparedStatement* statement = m_Database->PrepareStatement(query.c_str());
@@ -48,7 +48,7 @@ namespace Database {
 		return Select(statement);
 	}
 
-	Response::DatabaseResponse AuthenticatorAPI::Select(sql::PreparedStatement* statement)
+	Response::DatabaseResponse AuthenticatorAPI::Select(sql::PreparedStatement* statement) const
 	{
 		Response::DatabaseResponse response = DatabaseCheck();
 		if (response.GetStatus() != Response::Status::OK)
@@ -58,7 +58,7 @@ namespace Database {
 		return response;
 	}
 
-	Response::DatabaseResponse AuthenticatorAPI::Update(sql::PreparedStatement* statement)
+	Response::DatabaseResponse AuthenticatorAPI::Update(sql::PreparedStatement* statement) const
 	{
 		Response::DatabaseResponse response = DatabaseCheck();
 		if (response.GetStatus() != Response::Status::OK)
@@ -68,7 +68,7 @@ namespace Database {
 		return response;
 	}
 
-	Response::DatabaseResponse AuthenticatorAPI::DatabaseCheck()
+	Response::DatabaseResponse AuthenticatorAPI::DatabaseCheck() const
 	{
 		Response::DatabaseResponse response = {};
 		

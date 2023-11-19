@@ -7,4 +7,16 @@ namespace Database {
 	struct IDatabaseCommand {
 		virtual Response::DatabaseResponse Execute(TwoNet::Buffer& buffer) = 0;
 	};
+
+	template<typename T>
+	static Response::DatabaseResponse ParseTo(const char* data, T& object) {
+		Response::DatabaseResponse response;
+		bool success = authenticate.ParseFromString(data);
+		if (!success) {
+			response.SetFailureReason(Response::FailureReason::PARSING_ERROR);
+			return response;
+		}
+
+		return response;
+	}
 }

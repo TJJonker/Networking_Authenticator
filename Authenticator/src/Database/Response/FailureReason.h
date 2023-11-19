@@ -3,6 +3,7 @@
 namespace Database::Response {
 	enum class FailureReason {
 		NONE,
-		NO_CONNECTION
+		NO_CONNECTION,
+		PARSING_ERROR
 	};
 }
