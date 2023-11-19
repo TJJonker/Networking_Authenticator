@@ -70,6 +70,10 @@
       <Filter>Networking\Server</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Networking\ServerManager\ServerManager.h" />
+    <ClInclude Include="src\Commands\IDatabaseCommand.h" />
+    <ClInclude Include="src\Commands\CreatUserCommand.h" />
+    <ClInclude Include="src\Commands\AuthenticateUserCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Database\API\AuthenticatorAPI.cpp">
@@ -89,5 +93,6 @@
       <Filter>Networking\Server</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp" />
   </ItemGroup>
 </Project>

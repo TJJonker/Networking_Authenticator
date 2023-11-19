@@ -104,7 +104,7 @@ namespace Networking {
 		bool SendData(SOCKET socket, const TwoNet::Buffer& buffer) {
 			int result;
 
-			result = send(socket, buffer.GetBufferData(), buffer.GetSize(), 0);
+			result = send(socket, buffer.GetBufferData(), (int)buffer.GetSize(), 0);
 			if (result == SOCKET_ERROR) {
 				TWONET_CORE_WARN("Error while sending data.");
 				return false;

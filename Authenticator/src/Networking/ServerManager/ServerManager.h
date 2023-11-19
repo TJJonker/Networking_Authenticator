@@ -1,6 +1,6 @@
 #pragma once
 #include <Networking/Server/Server.h>
-#include <Commands/ICommand.h>
+#include "Commands/IDatabaseCommand.h"
 
 namespace Networking {
 	class ServerManager
@@ -9,7 +9,7 @@ namespace Networking {
 		ServerManager(const char* ip, const char* port);
 		void Update();
 
-		void AddCommand(std::string name, ICommand* command);
+		void AddCommand(std::string name, Database::IDatabaseCommand* command);
 
 	private:
 		void OnHandshake(TwoNet::Buffer& buffer, SOCKET socket);
@@ -18,7 +18,7 @@ namespace Networking {
 	private:
 		Server m_Server;
 		std::vector<SOCKET> m_Sockets;
-		std::map<std::string, ICommand*> m_Commands;
+		std::map<std::string, Database::IDatabaseCommand*> m_Commands;
 	};
 }
 
