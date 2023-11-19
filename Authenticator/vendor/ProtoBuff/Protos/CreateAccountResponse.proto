@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package Database;
+
+message CreateAccountResponse {
+	required int32 requestID = 1;
+	required bool success = 2;
+	optional int32 userID = 3;
+	
+	enum FailReason {
+		NONE = 0;
+		ACCOUNT_ALREADY_EXISTS = 1;
+		INTERNAL_SERVER_ERROR = 2;
+	}
+
+	required FailReason failReason = 4;
+}

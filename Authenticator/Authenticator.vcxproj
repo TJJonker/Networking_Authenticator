@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TWONET_DEBUG;TWONET_ASSERT_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\Debug-windows-x86_64\include;vendor\TwoNet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\Debug-windows-x86_64\include;vendor\TwoNet\include;vendor\ProtoBuff\Debug-windows-x86_64\include;vendor\ProtoBuff\Protos_Build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -91,7 +91,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\MYSQL\Debug-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>vendor\MYSQL\Debug-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;vendor\ProtoBuff\Debug-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>IF EXIST vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)</Command>
@@ -103,7 +103,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TWONET_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\Release-windows-x86_64\include;vendor\TwoNet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\Release-windows-x86_64\include;vendor\TwoNet\include;vendor\ProtoBuff\Release-windows-x86_64\include;vendor\ProtoBuff\Protos_Build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -118,7 +118,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\MYSQL\Release-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>vendor\MYSQL\Release-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;vendor\ProtoBuff\Release-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)
@@ -132,7 +132,7 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TWONET_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\Dist-windows-x86_64\include;vendor\TwoNet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\SPDLOG\include;vendor\MYSQL\Dist-windows-x86_64\include;vendor\TwoNet\include;vendor\ProtoBuff\Dist-windows-x86_64\include;vendor\ProtoBuff\Protos_Build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -147,14 +147,13 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\MYSQL\Dist-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>vendor\MYSQL\Dist-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;vendor\ProtoBuff\Dist-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Commands\AuthenticateUserCommand.h" />
     <ClInclude Include="src\Commands\CreatUserCommand.h" />
     <ClInclude Include="src\Commands\IDatabaseCommand.h" />
-    <ClInclude Include="src\Networking\ServerManager\ServerManager.h" />
     <ClInclude Include="src\Database\API\AuthenticatorAPI.h" />
     <ClInclude Include="src\Database\DataStructs\AuthenticateUserData.h" />
     <ClInclude Include="src\Database\DataStructs\ConnectionInfo.h" />
@@ -169,16 +168,17 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
     <ClInclude Include="src\Debug\Assertion.h" />
     <ClInclude Include="src\Debug\Log.h" />
     <ClInclude Include="src\Networking\Server\Server.h" />
+    <ClInclude Include="src\Networking\ServerManager\ServerManager.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp" />
     <ClCompile Include="src\Database\API\AuthenticatorAPI.cpp" />
     <ClCompile Include="src\Database\Database\Database.cpp" />
     <ClCompile Include="src\Database\Response\DatabaseResponse.cpp" />
     <ClCompile Include="src\Debug\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Networking\Server\Server.cpp" />
+    <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

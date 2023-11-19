@@ -17,12 +17,15 @@ project "Authenticator"
 		"src",
 		solutionDir .. "%{includeDirs.SPDLOG}",
 		solutionDir .. "%{includeDirs.MYSQL}",
-		solutionDir .. "%{includeDirs.TWONET}"
+		solutionDir .. "%{includeDirs.TWONET}",
+		solutionDir .. "%{includeDirs.PROTOBUFF}",
+		solutionDir .. "%{includeDirs.PROTOS}"
 	}
 
 	libdirs {
 		solutionDir .. "%{libraryDirs.MYSQL}",
-		solutionDir .. "%{libraryDirs.TWONET}"
+		solutionDir .. "%{libraryDirs.TWONET}",
+		solutionDir .. "%{libraryDirs.PROTOBUFF}"
 	}
 
 	links {

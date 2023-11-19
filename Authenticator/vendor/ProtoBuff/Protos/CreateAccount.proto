@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package Database;
+
+message CreateAccount {
+	required int32 requestID = 1;
+	required string email = 2;
+	required string password = 3;
+}

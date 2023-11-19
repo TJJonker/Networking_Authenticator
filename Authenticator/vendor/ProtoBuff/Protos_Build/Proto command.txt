@@ -1,0 +1,1 @@
+(ptp).exe -I=(src_dir) --cpp_out=(destdir) (srcdir).proto

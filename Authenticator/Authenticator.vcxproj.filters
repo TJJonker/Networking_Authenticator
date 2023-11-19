@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{17269CB7-03F3-F6C2-2C0C-E56A18382C51}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Database">
       <UniqueIdentifier>{BAF5A97D-A6C2-0489-CFDB-F230BB073A17}</UniqueIdentifier>
     </Filter>
@@ -25,8 +28,20 @@
     <Filter Include="Networking\Server">
       <UniqueIdentifier>{F3695F31-5F80-5DC7-A8F7-E8E8144D2E4F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Networking\ServerManager">
+      <UniqueIdentifier>{6E81D264-5AA6-21E5-83F1-06756F752003}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Commands\AuthenticateUserCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Commands\CreatUserCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Commands\IDatabaseCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
     <ClInclude Include="src\Database\API\AuthenticatorAPI.h">
       <Filter>Database\API</Filter>
     </ClInclude>
@@ -69,11 +84,10 @@
     <ClInclude Include="src\Networking\Server\Server.h">
       <Filter>Networking\Server</Filter>
     </ClInclude>
+    <ClInclude Include="src\Networking\ServerManager\ServerManager.h">
+      <Filter>Networking\ServerManager</Filter>
+    </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\Networking\ServerManager\ServerManager.h" />
-    <ClInclude Include="src\Commands\IDatabaseCommand.h" />
-    <ClInclude Include="src\Commands\CreatUserCommand.h" />
-    <ClInclude Include="src\Commands\AuthenticateUserCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Database\API\AuthenticatorAPI.cpp">
@@ -92,7 +106,9 @@
     <ClCompile Include="src\Networking\Server\Server.cpp">
       <Filter>Networking\Server</Filter>
     </ClCompile>
+    <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp">
+      <Filter>Networking\ServerManager</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp" />
   </ItemGroup>
 </Project>
