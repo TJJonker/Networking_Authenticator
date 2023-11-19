@@ -90,8 +90,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\MYSQL\Debug-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;vendor\ProtoBuff\Debug-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\MYSQL\Debug-windows-x86_64\lib64\vs14;vendor\TwoNet\lib\Debug-windows-x86_64;vendor\ProtoBuff\Debug-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>IF EXIST vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Debug-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName) &gt; nul)</Command>
@@ -117,8 +117,8 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\MYSQL\Release-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;vendor\ProtoBuff\Release-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\MYSQL\Release-windows-x86_64\lib64\vs14;vendor\TwoNet\lib\Release-windows-x86_64;vendor\ProtoBuff\Release-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll\ (xcopy /Q /E /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul) ELSE (xcopy /Q /Y /I vendor\MYSQL\Release-windows-x86_64\lib64\mysqlcppconn-9-vs14.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName) &gt; nul)
@@ -147,7 +147,7 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>mysqlcppconn.lib;ws2_32.lib;TwoNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\MYSQL\Dist-windows-x86_64\lib64\vs14;vendor\TwoNet\lib;vendor\ProtoBuff\Dist-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>vendor\MYSQL\Dist-windows-x86_64\lib64\vs14;vendor\TwoNet\lib\Dist-windows-x86_64;vendor\ProtoBuff\Dist-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

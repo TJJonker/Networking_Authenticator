@@ -2,8 +2,8 @@ project "TwoNet"
 	kind "StaticLib"
 	language "C++"
 
-	targetdir ("lib")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir ("lib/" .. outputdir)
+	objdir ("bin-int/" .. outputdir)
 
 	pchheader "tpch.h"
 	pchsource "src/tpch.cpp" 
@@ -23,8 +23,7 @@ project "TwoNet"
 	filter "system:windows"
 		cppdialect "C++17"
 		systemversion "latest"
-		staticruntime "off"
-		runtime "Debug"
+		staticruntime "on"
 
 	filter "configurations:Debug"
 		symbols "On"

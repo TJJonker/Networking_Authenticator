@@ -1,6 +1,7 @@
 project "Authenticator"
 	kind "ConsoleApp"
 	language "C++"
+	dependson "TwoNet"
 
 	targetdir (solutionDir .. "/bin/" .. outputdir .. "/%{prj.name}")
 	objdir (solutionDir .. "/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -50,10 +51,14 @@ project "Authenticator"
 	filter "configurations:Debug"
 		defines {
 			"TWONET_DEBUG",
-			"TWONET_ASSERT_ENABLED"	
+			"TWONET_ASSERT_ENABLED"
 		}
 		symbols "On"
 		staticruntime "off"
+
+		links {
+			"libprotobufd.lib"
+		}
 
 		prebuildcommands {
 			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn-9-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}")
@@ -62,6 +67,10 @@ project "Authenticator"
 	filter "configurations:Release"
 		defines "TWONET_RELEASE"
 		optimize "On"
+
+		links {
+			"libprotobuf.lib"
+		}
 
 		prebuildcommands {
 			("{COPY} vendor/MYSQL/" .. outputdir .. "/lib64/mysqlcppconn-9-vs14.dll " .. solutionDir .. "bin/" .. outputdir .. "/%{prj.name}"),

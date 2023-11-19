@@ -30,13 +30,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
@@ -54,20 +54,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>lib\</OutDir>
-    <IntDir>bin-int\Debug-windows-x86_64\TwoNet\</IntDir>
+    <OutDir>lib\Debug-windows-x86_64\</OutDir>
+    <IntDir>bin-int\Debug-windows-x86_64\</IntDir>
     <TargetName>TwoNet</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>lib\</OutDir>
-    <IntDir>bin-int\Release-windows-x86_64\TwoNet\</IntDir>
+    <OutDir>lib\Release-windows-x86_64\</OutDir>
+    <IntDir>bin-int\Release-windows-x86_64\</IntDir>
     <TargetName>TwoNet</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <OutDir>lib\</OutDir>
-    <IntDir>bin-int\Dist-windows-x86_64\TwoNet\</IntDir>
+    <OutDir>lib\Dist-windows-x86_64\</OutDir>
+    <IntDir>bin-int\Dist-windows-x86_64\</IntDir>
     <TargetName>TwoNet</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -79,7 +79,7 @@
       <AdditionalIncludeDirectories>include\TwoNet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -95,7 +95,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>include\TwoNet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -110,7 +110,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>include\TwoNet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
