@@ -74,7 +74,7 @@ namespace TwoNet::Networking {
 			for (SOCKET socket : sockets) {
 				result = select((int)socket, &temp, NULL, NULL, &m_Timeout);
 
-				if (FD_ISSET(socket, &temp) && socket == m_ListenSocket)
+				if (!FD_ISSET(socket, &temp) || socket == m_ListenSocket)
 					continue;
 
 				TwoNet::Buffer buffer;
@@ -152,15 +152,17 @@ namespace TwoNet::Networking {
 			const unsigned int maxBufferSize = 1024;
 			char buffer[maxBufferSize];
 			int totalBytesRead = 0;
-
+			TWONET_TRACE("3.1");
 			while (true) {
 				int bytesRead = recv(clientSocket, buffer, maxBufferSize, 0);
 
+				TWONET_TRACE("3.2");
 				if (bytesRead > 0) {
 					// If there is data to be read.
 					receivedDataBuffer.WriteBuffer(buffer, bytesRead);
 					totalBytesRead += bytesRead;
 
+				TWONET_TRACE("3.3");
 					// If all the data is read.
 					if (bytesRead < maxBufferSize)
 						break;
@@ -176,6 +178,7 @@ namespace TwoNet::Networking {
 				}
 			}
 
+				TWONET_TRACE("3.4");
 			return true;
 		}
 

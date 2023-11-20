@@ -18,13 +18,15 @@ void ConnectingState::OnEnter()
 
 	LOG_INFO("Trying to connect to the server...");
 	std::string welcomeMessage;
-	if (!m_Networking->Connect()) {
+	if (!m_Networking->Connect([&](TwoNet::Networking::NetworkResponse& response) {
+			LOG_INFO("Connected to the server!");
+			LOG_WARNING(welcomeMessage);
+			m_StateManager->ChangeState(StateManager::AppState::LOBBY);
+		})) {
 		TWONET_LOG_ERROR("Failed to connect to server. Please restart the application.");
 		return;
 	}
-	LOG_INFO("Connected to the server!");
-	LOG_WARNING(welcomeMessage);
-	m_StateManager->ChangeState(StateManager::AppState::LOBBY);
+
 }
 
 void ConnectingState::OnExit() { }

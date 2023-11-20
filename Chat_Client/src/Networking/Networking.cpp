@@ -24,9 +24,21 @@ void Networking::Destroy()
 	delete m_Client;
 }
 
-bool Networking::Connect()
+bool Networking::Connect(ResultCallback callback)
 {
-	return m_Client->Connect();
+    int result = m_Client->Connect();
+
+    std::string randomFillement = "Random";
+    TwoNet::Buffer buffer;
+    TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
+    TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
+    Submit(buffer, 
+        [callback](TwoNet::Buffer& buffer) {
+            TwoNet::Networking::NetworkResponse response;
+            callback(response);
+        });
+
+    return result;
 }
 
 void Networking::Update()
@@ -171,10 +183,10 @@ void Networking::OnDataReceipt(TwoNet::Buffer& buffer)
 
 void Networking::OnHandshake()
 {
-    std::string randomFillement = "Random";
-    TwoNet::Buffer buffer;
-    TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
-    TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
-    Submit(buffer, [](TwoNet::Buffer& buffer) {});
+    //std::string randomFillement = "Random";
+    //TwoNet::Buffer buffer;
+    //TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
+    //TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
+    //Submit(buffer, [](TwoNet::Buffer& buffer) {});
 }
 

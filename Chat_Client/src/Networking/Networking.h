@@ -12,6 +12,8 @@ private:
 	TwoNet::Networking::Client* m_Client;
 	std::map<long, BufferCallback> m_Submissions;
 
+
+
 public:
 	Networking();
 	~Networking();
@@ -19,7 +21,7 @@ public:
 	bool Initialize(const char* ip, const char* port);
 	void Destroy();
 
-	bool Connect();
+	bool Connect(ResultCallback callback);
 
 	void Update();
 
