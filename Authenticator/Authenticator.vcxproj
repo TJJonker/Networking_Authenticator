@@ -123,7 +123,6 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
     <ClInclude Include="src\Database\Response\Status.h" />
     <ClInclude Include="src\Debug\Assertion.h" />
     <ClInclude Include="src\Debug\Log.h" />
-    <ClInclude Include="src\Networking\Server\Server.h" />
     <ClInclude Include="src\Networking\ServerManager\ServerManager.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="vendor\ProtoBuff\Protos_Build\Authenticate\Authenticate.pb.h" />
@@ -139,7 +138,6 @@ IF EXIST vendor\MYSQL\Release-windows-x86_64\lib64\libssl-1_1-x64.dll\ (xcopy /Q
     <ClCompile Include="src\Database\Response\DatabaseResponse.cpp" />
     <ClCompile Include="src\Debug\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Networking\Server\Server.cpp" />
     <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

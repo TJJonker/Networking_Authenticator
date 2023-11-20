@@ -1,5 +1,5 @@
-#include "tpch.h"
-#include "Protocols/TwoProt.h"
+#include "TwoNet/tpch.h"
+#include "TwoNet/Protocols/TwoProt.h"
 
 namespace TwoNet {
 	void TwoProt::SerializeData(TwoNet::Buffer& buffer, const char* data, size_t dataLength)

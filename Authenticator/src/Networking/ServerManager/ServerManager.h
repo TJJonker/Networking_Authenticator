@@ -1,5 +1,5 @@
 #pragma once
-#include <Networking/Server/Server.h>
+#include <TwoNet/Networking/Server/Server.h>
 #include "Commands/IDatabaseCommand.h"
 
 namespace Networking {
@@ -16,7 +16,7 @@ namespace Networking {
 		void OnDataReceived(TwoNet::Buffer& buffer, SOCKET socket);
 
 	private:
-		Server m_Server;
+		TwoNet::Networking::Server m_Server;
 		std::vector<SOCKET> m_Sockets;
 		std::map<std::string, Database::IDatabaseCommand*> m_Commands;
 	};

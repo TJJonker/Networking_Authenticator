@@ -1,5 +1,5 @@
-#include "tpch.h"
-#include "Buffer/Buffer.h"
+#include "TwoNet/tpch.h"
+#include "TwoNet/Buffer/Buffer.h"
 #include <iostream>
 
 namespace TwoNet {
@@ -39,8 +39,8 @@ namespace TwoNet {
 	void Buffer::SerializeUInt_16(uint16_t value)
 	{
 		EnsureCapacity(sizeof(uint16_t));
-		m_Buffer[m_WriteIndex++] = value >> 8; 
-		m_Buffer[m_WriteIndex++] = value; 
+		m_Buffer[m_WriteIndex++] = (char)value >> 8; 
+		m_Buffer[m_WriteIndex++] = (char)value; 
 	}
 
 	uint32_t Buffer::DeserializeUInt_16()

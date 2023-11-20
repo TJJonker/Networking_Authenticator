@@ -28,9 +28,6 @@
     <Filter Include="src\Networking">
       <UniqueIdentifier>{24FE637E-10CC-5784-F95F-C8AAE5CC33E9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Networking\Server">
-      <UniqueIdentifier>{CAB26D86-361F-2981-FF12-C1DE6B3E4BE9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Networking\ServerManager">
       <UniqueIdentifier>{659249AD-514D-3959-FA04-B2A3E69E83E9}</UniqueIdentifier>
     </Filter>
@@ -105,9 +102,6 @@
     <ClInclude Include="src\Debug\Log.h">
       <Filter>src\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="src\Networking\Server\Server.h">
-      <Filter>src\Networking\Server</Filter>
-    </ClInclude>
     <ClInclude Include="src\Networking\ServerManager\ServerManager.h">
       <Filter>src\Networking\ServerManager</Filter>
     </ClInclude>
@@ -148,9 +142,6 @@
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Networking\Server\Server.cpp">
-      <Filter>src\Networking\Server</Filter>
     </ClCompile>
     <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp">
       <Filter>src\Networking\ServerManager</Filter>

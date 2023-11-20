@@ -4,7 +4,7 @@
 
 Networking::ServerManager::ServerManager(const char* ip, const char* port)
 {
-	m_Server.Intialize(ip, port);
+	m_Server.Initialize(ip, port);
 	m_Server.SetOnHandshake(std::bind(&Networking::ServerManager::OnHandshake, this, std::placeholders::_1, std::placeholders::_2));
 	m_Server.SetOnDataReceived(std::bind(&Networking::ServerManager::OnDataReceived, this, std::placeholders::_1, std::placeholders::_2));
 }

@@ -1,3 +1,4 @@
+#include "Client.h"
 #include "pch.h"
 #include "Client.h"
 #include "TwoNet/Protocols/TwoProt.h"

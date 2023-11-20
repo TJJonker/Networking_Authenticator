@@ -5,7 +5,7 @@ project "TwoNet"
 	targetdir ("lib/" .. outputdir)
 	objdir ("bin-int/" .. outputdir)
 
-	pchheader "tpch.h"
+	pchheader "TwoNet/tpch.h"
 	pchsource "src/tpch.cpp" 
 
 	files
@@ -15,10 +15,15 @@ project "TwoNet"
 	}
 
 	includedirs {
-		"include/TwoNet"
+		"include",
+		solutionDir .. "%{includeDirs.SPDLOG}"
 	}
 
 	defines { }
+
+	links {
+		"ws2_32.lib"
+	}
 
 	filter "system:windows"
 		cppdialect "C++17"
@@ -27,4 +32,8 @@ project "TwoNet"
 
 	filter "configurations:Debug"
 		symbols "On"
+		defines {
+			"TWONET_DEBUG",
+			"TWONET_ASSERT_ENABLED"
+		}
 	

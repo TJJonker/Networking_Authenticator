@@ -55,9 +55,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>tpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>TwoNet/tpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>include\TwoNet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TWONET_DEBUG;TWONET_ASSERT_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;..\SPDLOG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -68,13 +69,16 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>tpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>TwoNet/tpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>include\TwoNet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;..\SPDLOG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -83,18 +87,25 @@
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\TwoNet\Buffer\Buffer.h" />
+    <ClInclude Include="include\TwoNet\Debug\Assertion.h" />
+    <ClInclude Include="include\TwoNet\Debug\Log.h" />
+    <ClInclude Include="include\TwoNet\Networking\Client\Client.h" />
+    <ClInclude Include="include\TwoNet\Networking\Server\Server.h" />
     <ClInclude Include="include\TwoNet\Protocols\TwoProt.h" />
-    <ClInclude Include="include\TwoNet\Serialization\Serialization.h" />
     <ClInclude Include="include\TwoNet\Utils\Utils.h" />
     <ClInclude Include="include\TwoNet\tpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Buffer.cpp" />
-    <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Serialization.cpp" />
+    <ClCompile Include="src\Client.cpp" />
+    <ClCompile Include="src\Log.cpp" />
+    <ClCompile Include="src\Server.cpp" />
     <ClCompile Include="src\TwoProt.cpp" />
     <ClCompile Include="src\tpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

@@ -10,6 +10,15 @@
     <Filter Include="include\TwoNet\Buffer">
       <UniqueIdentifier>{C222CDFC-2E8F-88F7-F782-205563AEAA5F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\TwoNet\Debug">
+      <UniqueIdentifier>{2F74A58B-1B03-2F55-C421-4350B08F3FFB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\TwoNet\Networking">
+      <UniqueIdentifier>{702EC418-DCF0-F7A2-25A1-862F91A2D080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\TwoNet\Networking\Server">
+      <UniqueIdentifier>{96154330-8266-2E72-ABCA-1C34977AC1DB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="include\TwoNet\Protocols">
       <UniqueIdentifier>{6DF0E768-5915-37E9-8260-1C796EE43507}</UniqueIdentifier>
     </Filter>
@@ -27,11 +36,17 @@
     <ClInclude Include="include\TwoNet\Buffer\Buffer.h">
       <Filter>include\TwoNet\Buffer</Filter>
     </ClInclude>
+    <ClInclude Include="include\TwoNet\Debug\Assertion.h">
+      <Filter>include\TwoNet\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TwoNet\Debug\Log.h">
+      <Filter>include\TwoNet\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TwoNet\Networking\Server\Server.h">
+      <Filter>include\TwoNet\Networking\Server</Filter>
+    </ClInclude>
     <ClInclude Include="include\TwoNet\Protocols\TwoProt.h">
       <Filter>include\TwoNet\Protocols</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TwoNet\Serialization\Serialization.h">
-      <Filter>include\TwoNet\Serialization</Filter>
     </ClInclude>
     <ClInclude Include="include\TwoNet\Utils\Utils.h">
       <Filter>include\TwoNet\Utils</Filter>
@@ -39,15 +54,16 @@
     <ClInclude Include="include\TwoNet\tpch.h">
       <Filter>include\TwoNet</Filter>
     </ClInclude>
+    <ClInclude Include="include\TwoNet\Networking\Client\Client.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Buffer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp">
+    <ClCompile Include="src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Serialization.cpp">
+    <ClCompile Include="src\Server.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\TwoProt.cpp">
@@ -56,5 +72,6 @@
     <ClCompile Include="src\tpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Client.cpp" />
   </ItemGroup>
 </Project>
