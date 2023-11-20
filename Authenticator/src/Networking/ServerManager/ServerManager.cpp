@@ -17,7 +17,7 @@ void Networking::ServerManager::Update()
 
 void Networking::ServerManager::AddCommand(std::string name, Database::IDatabaseCommand* command)
 {
-	TWONET_CORE_ASSERT(m_Commands.count(name), "Command name already exists.");
+	TWONET_CORE_ASSERT(!m_Commands.count(name), "Command name already exists.");
 	m_Commands[name] = command;
 }
 

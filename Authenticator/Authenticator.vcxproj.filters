@@ -131,6 +131,9 @@
     <ClCompile Include="src\Commands\AuthenticateUserCommand.cpp">
       <Filter>src\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="src\Commands\CreatUserCommand.cpp">
+      <Filter>src\Commands</Filter>
+    </ClCompile>
     <ClCompile Include="src\Database\API\AuthenticatorAPI.cpp">
       <Filter>src\Database\API</Filter>
     </ClCompile>
@@ -167,6 +170,5 @@
     <ClCompile Include="vendor\ProtoBuff\Protos_Build\CreateAccountResponse\CreateAccountResponse.pb.cc">
       <Filter>vendor\ProtoBuff\Protos_Build\CreateAccountResponse</Filter>
     </ClCompile>
-    <ClCompile Include="src\Commands\CreatUserCommand.cpp" />
   </ItemGroup>
 </Project>

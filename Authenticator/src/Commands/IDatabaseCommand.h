@@ -11,7 +11,7 @@ namespace Database {
 	template<typename T>
 	static Response::DatabaseResponse ParseTo(const char* data, T& object) {
 		Response::DatabaseResponse response;
-		bool success = authenticate.ParseFromString(data);
+		bool success = object.ParseFromString(data);
 		if (!success) {
 			response.SetFailureReason(Response::FailureReason::PARSING_ERROR);
 			return response;

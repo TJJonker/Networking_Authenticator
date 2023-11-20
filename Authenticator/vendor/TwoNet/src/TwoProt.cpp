@@ -4,7 +4,7 @@
 namespace TwoNet {
 	void TwoProt::SerializeData(TwoNet::Buffer& buffer, const char* data, size_t dataLength)
 	{
-		buffer.SerializeUInt_16(dataLength);
+		buffer.SerializeUInt_16((uint16_t)dataLength);
 		buffer.SerializeData(data, dataLength);
 	}
 

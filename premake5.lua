@@ -4,8 +4,7 @@ workspace "Networking Authenticator"
 
 	configurations {
 		"Debug",
-		"Release",
-		"Dist"
+		"Release"
 	}
 
 solutionDir = "%{wks.location}/"
@@ -27,3 +26,5 @@ libraryDirs["OPENSSL"] = "Authenticator/vendor/OpenSSL/lib"
 
 include "Authenticator/vendor/TwoNet"
 include "Authenticator"
+include "Chat_Server"
+include "Chat_Client"
