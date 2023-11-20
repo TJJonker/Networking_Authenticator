@@ -16,7 +16,7 @@ namespace Database {
 		
 	private:
 		Response::DatabaseResponse ParseToObject(Database::Authenticate authenticate, TwoNet::Buffer& buffer);
-		unsigned char* HashPassword(std::string rawPassword, std::string salt);
+		std::vector<unsigned char> HashPassword(std::string rawPassword, std::string salt);
 		void SetCreateUserFailData(Response::DatabaseResponse& response, long requestID);
 
 	private:

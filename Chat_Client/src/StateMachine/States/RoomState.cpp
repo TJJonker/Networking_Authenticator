@@ -35,9 +35,9 @@ void RoomState::GetUserInput()
 					continue;
 
 				if (input == "E") {
-					m_Networking->RequestLeaveRoom([&](std::string response)
+					m_Networking->LeaveRoom([&](TwoNet::Networking::NetworkResponse response)
 						{
-							if (response == TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::SUCCESS)) { 
+							if (response.string == TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::SUCCESS)) { 
 								m_ChangeState = true;
 							}
 							else {
@@ -47,8 +47,8 @@ void RoomState::GetUserInput()
 					);
 				} 
 				else {
-					m_Networking->RequestSendMessage(input, [&](std::string response) {
-							if (response == TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::SUCCESS)) {
+					m_Networking->SendChat(input, [&](TwoNet::Networking::NetworkResponse response) {
+							if (response.string == TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::SUCCESS)) {
 								GetUserInput();
 							}
 							else {
@@ -68,12 +68,12 @@ void RoomState::RetrieveMessages()
 {
 	std::thread([&]() {
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
-		m_Networking->CheckIncomingMessages([&](std::vector<std::string> messages)
+		m_Networking->RequestMessages([&](TwoNet::Networking::NetworkResponse response)
 			{
-				if (messages.size() >= m_AmountOfMessages) {
-					for (int i = m_AmountOfMessages; i < messages.size(); i++) {
+				if (response.List.size() >= m_AmountOfMessages) {
+					for (int i = m_AmountOfMessages; i < response.List.size(); i++) {
 						m_AmountOfMessages++;
-						LOG_WARNING(messages[i]);
+						LOG_WARNING(response.List[i]);
 					}
 				}
 

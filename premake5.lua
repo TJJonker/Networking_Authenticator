@@ -3,8 +3,7 @@ workspace "Networking Authenticator"
 	startproject "Authenticator" 
 
 	configurations {
-		"Debug",
-		"Release"
+		"Debug"
 	}
 
 solutionDir = "%{wks.location}/"

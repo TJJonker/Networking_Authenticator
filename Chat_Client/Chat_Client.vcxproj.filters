@@ -21,9 +21,6 @@
     <ClInclude Include="src\Debug\Log.h">
       <Filter>Debug</Filter>
     </ClInclude>
-    <ClInclude Include="src\Networking\Client.h">
-      <Filter>Networking</Filter>
-    </ClInclude>
     <ClInclude Include="src\Networking\Networking.h">
       <Filter>Networking</Filter>
     </ClInclude>
@@ -52,9 +49,6 @@
       <Filter>Debug</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Networking\Client.cpp">
-      <Filter>Networking</Filter>
-    </ClCompile>
     <ClCompile Include="src\Networking\Networking.cpp">
       <Filter>Networking</Filter>
     </ClCompile>

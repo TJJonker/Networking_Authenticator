@@ -39,8 +39,8 @@ namespace TwoNet {
 	void Buffer::SerializeUInt_16(uint16_t value)
 	{
 		EnsureCapacity(sizeof(uint16_t));
-		m_Buffer[m_WriteIndex++] = (char)value >> 8; 
-		m_Buffer[m_WriteIndex++] = (char)value; 
+		m_Buffer[m_WriteIndex++] = value >> 8; 
+		m_Buffer[m_WriteIndex++] = value; 
 	}
 
 	uint32_t Buffer::DeserializeUInt_16()

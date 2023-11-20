@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Client">
-      <UniqueIdentifier>{644D06AC-50EF-3082-39AA-44D625EBB7D2}</UniqueIdentifier>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{17269CB7-03F3-F6C2-2C0C-E56A18382C51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\GetMessages">
+      <UniqueIdentifier>{5E17A21B-4AA6-2BE5-F3C4-3FE0DF323C8B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\GetRooms">
+      <UniqueIdentifier>{B6B80F52-22CF-0DE8-6B46-9909D79BDE6F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\JoinRoom">
+      <UniqueIdentifier>{539FDD00-BFB5-DB96-082D-67B87482AC1E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\LeaveRoom">
+      <UniqueIdentifier>{30651777-1C49-D8CC-85A9-D21F71ACC24E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\SendChat">
+      <UniqueIdentifier>{90385458-FC4E-52EE-45C6-DD0FB11B2376}</UniqueIdentifier>
     </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{0C95060D-78A9-2EBE-412B-D21DADFE2AEF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Server">
-      <UniqueIdentifier>{7C62DFD0-6804-0AA7-51BF-1DFB3D0091F7}</UniqueIdentifier>
+    <Filter Include="Networking">
+      <UniqueIdentifier>{6D615D47-5919-9F94-C220-78F0AEF73985}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Server\Commands">
-      <UniqueIdentifier>{3D892DDB-A914-9B9F-B225-1E941E30F79F}</UniqueIdentifier>
+    <Filter Include="Networking\Client">
+      <UniqueIdentifier>{DB54860C-476B-84A2-90E2-0FC4FC37552A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Server\Rooms">
-      <UniqueIdentifier>{1B634344-07C6-D2E8-B04B-0B9F9C8D9E6B}</UniqueIdentifier>
+    <Filter Include="Networking\Response">
+      <UniqueIdentifier>{6BED8D1C-D74E-6B2A-60BC-B1DCCC1CA2E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Networking\ServerManager">
+      <UniqueIdentifier>{6E81D264-5AA6-21E5-83F1-06756F752003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rooms">
+      <UniqueIdentifier>{359E090E-A1B2-31BF-6A34-D51ED6072EF0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Client\Client.h">
-      <Filter>Client</Filter>
+    <ClInclude Include="src\Commands\GetMessages\GetMessagesCommand.h">
+      <Filter>Commands\GetMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Commands\GetRooms\GetRoomsCommand.h">
+      <Filter>Commands\GetRooms</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Commands\ICommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Commands\JoinRoom\JoinRoomCommand.h">
+      <Filter>Commands\JoinRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Commands\LeaveRoom\LeaveRoomCommand.h">
+      <Filter>Commands\LeaveRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Commands\SendChat\SendChatCommand.h">
+      <Filter>Commands\SendChat</Filter>
     </ClInclude>
     <ClInclude Include="src\Debug\Assertion.h">
       <Filter>Debug</Filter>
@@ -27,39 +63,51 @@
     <ClInclude Include="src\Debug\Log.h">
       <Filter>Debug</Filter>
     </ClInclude>
-    <ClInclude Include="src\Server\Commands\Commands.h">
-      <Filter>Server\Commands</Filter>
+    <ClInclude Include="src\Networking\Client\Client.h">
+      <Filter>Networking\Client</Filter>
     </ClInclude>
-    <ClInclude Include="src\Server\NetworkServer.h">
-      <Filter>Server</Filter>
+    <ClInclude Include="src\Networking\Response\ServerResponse.h">
+      <Filter>Networking\Response</Filter>
     </ClInclude>
-    <ClInclude Include="src\Server\Rooms\Room.h">
-      <Filter>Server\Rooms</Filter>
+    <ClInclude Include="src\Networking\ServerManager\ServerManager.h">
+      <Filter>Networking\ServerManager</Filter>
     </ClInclude>
-    <ClInclude Include="src\Server\Rooms\RoomManager.h">
-      <Filter>Server\Rooms</Filter>
+    <ClInclude Include="src\Rooms\Room.h">
+      <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rooms\RoomManager.h">
+      <Filter>Rooms</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Client\Client.cpp">
-      <Filter>Client</Filter>
+    <ClCompile Include="src\Commands\GetMessages\GetMessagesCommand.cpp">
+      <Filter>Commands\GetMessages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Commands\GetRooms\GetRoomsCommand.cpp">
+      <Filter>Commands\GetRooms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Commands\JoinRoom\JoinRoomCommand.cpp">
+      <Filter>Commands\JoinRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Commands\LeaveRoom\LeaveRoomCommand.cpp">
+      <Filter>Commands\LeaveRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Commands\SendChat\SendChatCommand.cpp">
+      <Filter>Commands\SendChat</Filter>
     </ClCompile>
     <ClCompile Include="src\Debug\Log.cpp">
       <Filter>Debug</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Server\Commands\Commands.cpp">
-      <Filter>Server\Commands</Filter>
+    <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp">
+      <Filter>Networking\ServerManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\Server\NetworkServer.cpp">
-      <Filter>Server</Filter>
+    <ClCompile Include="src\Rooms\Room.cpp">
+      <Filter>Rooms</Filter>
     </ClCompile>
-    <ClCompile Include="src\Server\Rooms\Room.cpp">
-      <Filter>Server\Rooms</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Server\Rooms\RoomManager.cpp">
-      <Filter>Server\Rooms</Filter>
+    <ClCompile Include="src\Rooms\RoomManager.cpp">
+      <Filter>Rooms</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
   </ItemGroup>

@@ -1,26 +1,37 @@
 #pragma once
-#include "Client.h"
+#include <TwoNet/Networking/Client/Client.h>
+#include <TwoNet/DataStructs/NetworkResponse.h>
 
 class Networking
 {
+
 private:
-	Client* m_Client;
+	using ResultCallback = std::function<void(TwoNet::Networking::NetworkResponse)>;
+	using BufferCallback = std::function<void(TwoNet::Buffer& buffer)>;
+
+	TwoNet::Networking::Client* m_Client;
+	std::map<long, BufferCallback> m_Submissions;
 
 public:
-
 	Networking();
 	~Networking();
 
 	bool Initialize(const char* ip, const char* port);
 	void Destroy();
 
-	bool Connect(std::string clientID = " ", std::string* welcomeMessage = nullptr);
+	bool Connect();
 
-	bool RequestRooms(std::function<void(std::vector<std::string>)> callback);
-	bool RequestJoinRoom(std::string roomName, std::function<void(std::string)> callback);
-	bool RequestLeaveRoom(std::function<void(std::string)> callback);
-	bool RequestSendMessage(std::string message, std::function<void(std::string)> callback);
+	void Update();
 
-	bool CheckIncomingMessages(std::function<void(std::vector<std::string>)> callback);
+	bool RequestRooms(ResultCallback callback);
+	bool JoinRoom(std::string roomName, ResultCallback callback);
+	bool LeaveRoom(ResultCallback callback);
+	bool SendChat(std::string message, ResultCallback callback);
+	bool RequestMessages(ResultCallback callback);
+
+private:
+	void Submit(TwoNet::Buffer& buffer, BufferCallback callback);
+	void OnDataReceipt(TwoNet::Buffer& buffer);
+	void OnHandshake();
 };
 

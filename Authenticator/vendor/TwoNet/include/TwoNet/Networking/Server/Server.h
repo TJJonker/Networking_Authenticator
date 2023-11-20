@@ -6,11 +6,12 @@
 
 namespace TwoNet::Networking {
 
-	using DataFunction = std::function<void(Buffer& buffer, SOCKET socket)>;
 
 	class Server
 	{
 	public:
+		using DataFunction = std::function<void(Buffer& buffer, SOCKET socket)>;
+
 		Server();
 		~Server();
 

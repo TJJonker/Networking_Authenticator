@@ -9,7 +9,6 @@ ConnectingState::~ConnectingState() { }
 
 void ConnectingState::OnEnter()
 {
-	int result;
 	std::string username;
 
 	LOG_WARNING("Welcome!");
@@ -19,12 +18,11 @@ void ConnectingState::OnEnter()
 
 	LOG_INFO("Trying to connect to the server...");
 	std::string welcomeMessage;
-	result = m_Networking->Connect(username, &welcomeMessage);
-	if (!result) {
+	if (!m_Networking->Connect()) {
 		TWONET_LOG_ERROR("Failed to connect to server. Please restart the application.");
 		return;
 	}
-	
+	LOG_INFO("Connected to the server!");
 	LOG_WARNING(welcomeMessage);
 	m_StateManager->ChangeState(StateManager::AppState::LOBBY);
 }

@@ -4,10 +4,11 @@
 #include "StateMachine/States/ConnectingState.h"
 #include "StateMachine/States/LobbyState.h"
 #include "StateMachine/States/RoomState.h"
-#include <TwoNet/Protocols/TwoProt.h>
+
 
 
 int main() {
+	Debug::Log::Init();
 	TwoNet::Log::Init();
 
 	Networking* networking = new Networking();
@@ -21,5 +22,7 @@ int main() {
 	states.insert({ StateManager::AppState::ROOM, new RoomState(stateManager, networking)});
 	stateManager->Initialize(states);
 
-	while (true);
+	while (true) {
+		networking->Update();
+	}
 }

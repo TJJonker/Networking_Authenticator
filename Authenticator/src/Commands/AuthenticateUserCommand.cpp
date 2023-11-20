@@ -27,7 +27,7 @@ namespace Database {
 		sql::ResultSet* result = response.GetResult();
 
 		// Hash password
-		unsigned char* hashedPassword = HashPassword(authenticate.password(), result->getString(4).c_str());
+		unsigned char* hashedPassword = HashPassword(authenticate.password(), result->getString(4).c_str()).data();
 
 		// Compare password
 		int compareResult = hashedPassword == (unsigned char*) result->getString(5).c_str();
@@ -56,11 +56,11 @@ namespace Database {
 		return ParseTo<Database::Authenticate>(rawData, authenticate);
 	}
 
-	unsigned char* AuthenticateUserCommand::HashPassword(std::string rawPassword, std::string salt)
+	std::vector<unsigned char> AuthenticateUserCommand::HashPassword(std::string rawPassword, std::string salt)
 	{
 		std::string saltedPassword = salt + rawPassword;
-		unsigned char hashedPassword[SHA256_DIGEST_LENGTH];
-		SHA256((unsigned char*)saltedPassword.c_str(), saltedPassword.length(), hashedPassword);
+		std::vector<unsigned char> hashedPassword(SHA256_DIGEST_LENGTH);
+		SHA256((unsigned char*)saltedPassword.c_str(), saltedPassword.length(), hashedPassword.data());
 		return hashedPassword;
 	}
 
@@ -74,7 +74,7 @@ namespace Database {
 			case Response::FailureReason::PARSING_ERROR: reason = AuthenticateResponse_FailReason_INTERNAL_SERVER_ERROR; break;
 			case Response::FailureReason::INVALID_CREDENTIALS: reason = AuthenticateResponse_FailReason_INVALID_CREDENTIALS; break;
 			case Response::FailureReason::EMAIL_ALREADY_EXISTS: reason = AuthenticateResponse_FailReason_INVALID_CREDENTIALS; break;
-			default: TWONET_CORE_ASSERT(false, "Not implemented.");
+			default: TWONET_CORE_ASSERT(false, "Not implemented."); break;
 		}
 
 		// Create response object

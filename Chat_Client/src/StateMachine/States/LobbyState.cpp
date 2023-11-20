@@ -9,17 +9,17 @@ LobbyState::~LobbyState() { }
 
 void LobbyState::OnEnter()
 {
-	m_Networking->RequestRooms([&](std::vector<std::string> roomNames) {
-			m_RoomNames = roomNames;
+	m_Networking->RequestRooms([&](TwoNet::Networking::NetworkResponse response) {
+			m_RoomNames = response.List;
 			LOG_WARNING("Which room do you want to join? (Repeat the room name)"); 
 	
 			for (std::string& name : m_RoomNames) 
 				LOG_WARNING(name); 
 	
 			std::string roomChoice = ChooseRoom();
-			m_Networking->RequestJoinRoom(roomChoice, [&](std::string response) 
+			m_Networking->JoinRoom(roomChoice, [&](TwoNet::Networking::NetworkResponse response) 
 				{ 
-					if (response == TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::FAILED)) {
+					if (response.string == TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::FAILED)) {
 						TWONET_LOG_ERROR("Failed to join the room. Please restart the application.");
 						return;
 					}

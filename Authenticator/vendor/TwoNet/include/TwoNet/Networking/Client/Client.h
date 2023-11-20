@@ -5,12 +5,13 @@
 #include <TwoNet/Buffer/Buffer.h>
 
 namespace TwoNet::Networking {
-	using HandshakeFunction = std::function<void()>;
-	using DataFunction = std::function<void(Buffer& buffer)>;
 	
 	class Client
 	{
 	public:
+		using HandshakeFunction = std::function<void()>;
+		using DataFunction = std::function<void(Buffer& buffer)>;
+
 		Client();
 		~Client();
 

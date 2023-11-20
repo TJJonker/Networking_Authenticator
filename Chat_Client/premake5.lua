@@ -39,4 +39,8 @@ project "Chat_Client"
 
 	filter "configurations:Debug"
 		symbols "On"
+		defines {
+			"TWONET_DEBUG",
+			"TWONET_ASSERT_ENABLED"
+		}
 	

@@ -13,8 +13,10 @@ Networking::~Networking()
 
 bool Networking::Initialize(const char* ip, const char* port)
 {
-	m_Client = new Client(ip, port);
-	return m_Client->Initialize();
+	m_Client = new TwoNet::Networking::Client();
+    m_Client->SetOnDataReceived(std::bind(&Networking::OnDataReceipt, this, std::placeholders::_1));
+    m_Client->SetOnHandshake(std::bind(&Networking::OnHandshake, this));
+    return m_Client->Initialize(ip, port);
 }
 
 void Networking::Destroy()
@@ -22,65 +24,79 @@ void Networking::Destroy()
 	delete m_Client;
 }
 
-bool Networking::Connect(std::string clientID, std::string* welcomeMessage)
+bool Networking::Connect()
 {
-	return m_Client->Connect(clientID, welcomeMessage);
+	return m_Client->Connect();
 }
 
-bool Networking::RequestRooms(std::function<void(std::vector<std::string>)> callback)
+void Networking::Update()
+{
+    m_Client->CheckForIncomingData();
+}
+
+bool Networking::RequestRooms(ResultCallback callback)
 {
 	TwoNet::Buffer buffer;
 	std::string command = "LIST_ROOMS";
 
 	TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
-    m_Client->SendData(buffer, [&, callback](TwoNet::Buffer buffer) {
-            std::vector<std::string> roomNames;
+    // Second time for hacky reasons
+	TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
+    Submit(buffer, 
+        [&, callback](TwoNet::Buffer buffer) {
+            TwoNet::Networking::NetworkResponse response;
             while (true) {
                 const char* data = TwoNet::TwoProt::DeserializeData(buffer);
                 if (data == nullptr)
                     break;
-                roomNames.push_back(data);
+                response.List.push_back(data);
             }
-            callback(roomNames);
+            callback(response);
         });
 
 	return true;
 }
 
-bool Networking::RequestJoinRoom(std::string roomName, std::function<void(std::string)> callback)
+bool Networking::JoinRoom(std::string roomName, ResultCallback callback)
 {
     TwoNet::Buffer buffer;
     std::string command = "JOIN_ROOM";
     TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length()); 
     TwoNet::TwoProt::SerializeData(buffer, roomName.c_str(), roomName.length());
 
-    m_Client->SendData(buffer, [&, callback](TwoNet::Buffer buffer) {
-            const char* data = TwoNet::TwoProt::DeserializeData(buffer);
-            if (data)
-                callback(data);
+    Submit(buffer, 
+        [&, callback](TwoNet::Buffer localBuffer) {
+            TwoNet::Networking::NetworkResponse response;
+            response.string = TwoNet::TwoProt::DeserializeData(localBuffer);
+            if (response.string != "")
+                callback(response);
         }
     );
 
     return true;
 }
 
-bool Networking::RequestLeaveRoom(std::function<void(std::string)> callback)
+bool Networking::LeaveRoom(ResultCallback callback)
 {
     TwoNet::Buffer buffer; 
     std::string command = "LEAVE_ROOM"; 
 
     TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
-    m_Client->SendData(buffer, [&, callback](TwoNet::Buffer buffer) {
-            const char* data = TwoNet::TwoProt::DeserializeData(buffer);
-            if (data)
-                callback(data);
+    // Second time for hacky reasons
+    TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
+    Submit(buffer, 
+        [&, callback](TwoNet::Buffer localBuffer) {
+            TwoNet::Networking::NetworkResponse response;
+            response.string = TwoNet::TwoProt::DeserializeData(localBuffer);
+            if (response.string != "")
+                callback(response);
         }
     );
 
     return true;
 }
 
-bool Networking::RequestSendMessage(std::string message, std::function<void(std::string)> callback)
+bool Networking::SendChat(std::string message, ResultCallback callback)
 {
     TwoNet::Buffer buffer;
     std::string command = "SEND_MESSAGE";
@@ -88,34 +104,77 @@ bool Networking::RequestSendMessage(std::string message, std::function<void(std:
     TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length()); 
     TwoNet::TwoProt::SerializeData(buffer, message.c_str(), message.length());
 
-    m_Client->SendData(buffer, [&, callback](TwoNet::Buffer buffer) {
-            const char* data = TwoNet::TwoProt::DeserializeData(buffer);
-            if (data)
-                callback(data);
+    Submit(buffer, 
+        [&, callback](TwoNet::Buffer localBuffer) {
+            TwoNet::Networking::NetworkResponse response;
+            response.string = TwoNet::TwoProt::DeserializeData(localBuffer);
+            if (response.string != "")
+                callback(response);
         }
     );
 
     return true;
 }
 
-bool Networking::CheckIncomingMessages(std::function<void(std::vector<std::string>)> callback)
+bool Networking::RequestMessages(ResultCallback callback)
 {
     TwoNet::Buffer buffer; 
     std::string command = "GET_MESSAGES";
 
     TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
-    m_Client->SendData(buffer, [&, callback](TwoNet::Buffer buffer) {
-            std::vector<std::string> newMessages;
+    // Second time for hacky reasons
+    TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
+
+    Submit(buffer, 
+        [&, callback](TwoNet::Buffer& localBuffer) {
+            TwoNet::Networking::NetworkResponse response;
             while (true) {
-                const char* data = TwoNet::TwoProt::DeserializeData(buffer);
+                const char* data = TwoNet::TwoProt::DeserializeData(localBuffer);
                 if (data == nullptr)
                     break;
-                newMessages.push_back(data);
+                response.List.push_back(data);
             }
-            callback(newMessages);
+            callback(response);
         }
     );
 
     return true;
+}
+
+
+void Networking::Submit(TwoNet::Buffer& buffer, BufferCallback callback)
+{
+    static long index = 0;
+    std::string stringedIndex = std::to_string(index);
+    
+    m_Submissions[index] = callback;
+    index++;
+
+    TwoNet::Buffer newBuffer;
+    TwoNet::TwoProt::SerializeData(newBuffer, stringedIndex.c_str(), stringedIndex.length());
+
+    std::string command = TwoNet::TwoProt::DeserializeData(buffer);
+    TwoNet::TwoProt::SerializeData(newBuffer, command.c_str(), command.length());
+
+    std::string data = TwoNet::TwoProt::DeserializeData(buffer);
+    TwoNet::TwoProt::SerializeData(newBuffer, data.c_str(), data.length());
+
+    m_Client->SendData(newBuffer);
+}
+
+void Networking::OnDataReceipt(TwoNet::Buffer& buffer)
+{
+    std::string data = TwoNet::TwoProt::DeserializeData(buffer);
+    long requestID = std::stol(data);
+    m_Submissions[requestID](buffer);
+}
+
+void Networking::OnHandshake()
+{
+    std::string randomFillement = "Random";
+    TwoNet::Buffer buffer;
+    TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
+    TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
+    Submit(buffer, [](TwoNet::Buffer& buffer) {});
 }
 

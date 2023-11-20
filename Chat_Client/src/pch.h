@@ -14,3 +14,6 @@
 #include <future>
 #include <map>
 #include <queue>
+
+#include <TwoNet/Protocols/TwoProt.h>
+#include <TwoNet/Debug/Log.h>
