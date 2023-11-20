@@ -5,7 +5,7 @@
 #include <Authenticate/Authenticate.pb.h>
 
 namespace Database {
-#define CHECK(response) { if (response.GetStatus() == Response::Status::Failed) return response; }
+#define CHECK(response, requestID) { if (response.GetStatus() == Response::Status::Failed) { SetCreateUserFailData(response, requestID);  return response; }}
 
 	class AuthenticateUserCommand : public IDatabaseCommand {
 	public:
@@ -17,6 +17,7 @@ namespace Database {
 	private:
 		Response::DatabaseResponse ParseToObject(Database::Authenticate authenticate, TwoNet::Buffer& buffer);
 		unsigned char* HashPassword(std::string rawPassword, std::string salt);
+		void SetCreateUserFailData(Response::DatabaseResponse& response, long requestID);
 
 	private:
 		const AuthenticatorAPI& m_API;

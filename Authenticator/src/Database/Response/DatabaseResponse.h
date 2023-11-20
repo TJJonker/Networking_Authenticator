@@ -14,13 +14,13 @@ namespace Database::Response {
 		void SetResult(sql::ResultSet* result);
 		sql::ResultSet* GetResult() const;
 
-		void SetRequestID(long requestID);
-		long GetRequestID() const;
+		void SetData(std::string data);
+		std::string GetData() const;
 
 	private:
-		long m_RequestID;
 		Status m_Status = Status::OK;
 		FailureReason m_Reason = FailureReason::NONE;
-		sql::ResultSet* m_Result;		
+		sql::ResultSet* m_Result;	
+		std::string m_Data;
 	};
 }

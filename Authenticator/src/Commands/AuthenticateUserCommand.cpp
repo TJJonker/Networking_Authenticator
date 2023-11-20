@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "AuthenticateUserCommand.h"
+#include <AuthenticateResponse/AuthenticateResponse.pb.h>
 
 namespace Database {
 	Response::DatabaseResponse Database::AuthenticateUserCommand::Execute(TwoNet::Buffer& buffer)
@@ -9,17 +10,17 @@ namespace Database {
 		// Parse to Authenticate object
 		Database::Authenticate authenticate;
 		response = ParseToObject(authenticate, buffer);
-		CHECK(response);
+		CHECK(response, authenticate.requestid());
 
 		// Retrieve 
-		GetUserWithEmailData userData{ authenticate.email() };
+		GetUserWithEmailData userData { authenticate.email() };
 		response = m_API.GetUserWithEmail(userData);
-		CHECK(response);
+		CHECK(response, authenticate.requestid());
 
 		// Check if row is found.
 		if (!response.GetResult()->next()) {
 			response.SetFailureReason(Response::FailureReason::INVALID_CREDENTIALS);
-			return response;
+			CHECK(response, authenticate.requestid());
 		}
 
 		// Save result
@@ -34,10 +35,18 @@ namespace Database {
 		// Return data
 		if (!compareResult) {
 			response.SetFailureReason(Response::FailureReason::INVALID_CREDENTIALS);
-			return response;
+			CHECK(response, authenticate.requestid());
 		}
 
-		response.SetResult(result);
+		Database::AuthenticateResponse authenticationResponse;
+		authenticationResponse.set_requestid(authenticate.requestid());
+		authenticationResponse.set_success(true);
+		authenticationResponse.set_creationdate(result->getString(2));
+
+		std::string data;
+		authenticationResponse.SerializeToString(&data);
+		response.SetData(data);
+
 		return response;
 	}
 
@@ -53,5 +62,32 @@ namespace Database {
 		unsigned char hashedPassword[SHA256_DIGEST_LENGTH];
 		SHA256((unsigned char*)saltedPassword.c_str(), saltedPassword.length(), hashedPassword);
 		return hashedPassword;
+	}
+
+	void AuthenticateUserCommand::SetCreateUserFailData(Response::DatabaseResponse& response, long requestID)
+	{
+		// Check which error
+		Database::AuthenticateResponse_FailReason reason = AuthenticateResponse_FailReason_NONE;
+
+		switch (response.GetFailureReason()) {
+			case Response::FailureReason::NO_CONNECTION: reason = AuthenticateResponse_FailReason_INTERNAL_SERVER_ERROR;  break;
+			case Response::FailureReason::PARSING_ERROR: reason = AuthenticateResponse_FailReason_INTERNAL_SERVER_ERROR; break;
+			case Response::FailureReason::INVALID_CREDENTIALS: reason = AuthenticateResponse_FailReason_INVALID_CREDENTIALS; break;
+			case Response::FailureReason::EMAIL_ALREADY_EXISTS: reason = AuthenticateResponse_FailReason_INVALID_CREDENTIALS; break;
+			default: TWONET_CORE_ASSERT(false, "Not implemented.");
+		}
+
+		// Create response object
+		Database::AuthenticateResponse responseData;
+		responseData.set_requestid(requestID);
+		responseData.set_success(false);
+		responseData.set_failreason(reason);
+
+		// Serialize it into data
+		std::string serializedResponseData;
+		responseData.SerializeToString(&serializedResponseData);
+
+		// Put it into a response
+		response.SetData(serializedResponseData);
 	}
 }

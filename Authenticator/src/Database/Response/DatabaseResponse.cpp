@@ -33,13 +33,13 @@ namespace Database::Response {
 		return m_Result;
 	}
 
-	void DatabaseResponse::SetRequestID(long requestID)
+	void DatabaseResponse::SetData(std::string data)
 	{
-		m_RequestID = requestID;
+		m_Data = data;
 	}
 
-	long DatabaseResponse::GetRequestID() const
+	std::string DatabaseResponse::GetData() const
 	{
-		return m_RequestID;
+		return m_Data;
 	}
 }

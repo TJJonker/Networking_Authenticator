@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ServerManager.h"
+#include "Database/Response/DatabaseResponse.h"
 
 Networking::ServerManager::ServerManager(const char* ip, const char* port)
 {
@@ -23,8 +24,29 @@ void Networking::ServerManager::AddCommand(std::string name, Database::IDatabase
 void Networking::ServerManager::OnHandshake(TwoNet::Buffer& buffer, SOCKET socket)
 {
 	m_Sockets.push_back(socket);
+
+	buffer.Clear();
+	std::string welcomeMessage = (char*)true;
+	TwoNet::TwoProt::SerializeData(buffer, welcomeMessage.c_str(), welcomeMessage.length());
+	int result = m_Server.SendData(socket, buffer);
+	if (!result) {
+		TWONET_CORE_WARN("Failed to send handshake.");
+		return;
+	}
 }
 
 void Networking::ServerManager::OnDataReceived(TwoNet::Buffer& buffer, SOCKET socket)
 {
+	std::string command = TwoNet::TwoProt::DeserializeData(buffer);
+	Database::Response::DatabaseResponse response = m_Commands[command]->Execute(buffer);
+	buffer.Clear();
+
+	TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
+	TwoNet::TwoProt::SerializeData(buffer, response.GetData().c_str(), response.GetData().length());
+
+	int result = m_Server.SendData(socket, buffer);
+	if (!result) {
+		TWONET_CORE_WARN("Failed to send handshake.");
+		return;
+	}
 }

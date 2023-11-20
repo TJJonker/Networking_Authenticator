@@ -4,7 +4,7 @@
 #include <CreateAccount/CreateAccount.pb.h>
 
 namespace Database {
-#define CHECK(response) { if (response.GetStatus() == Response::Status::Failed) return response; }
+#define CHECK(response, requestID) { if (response.GetStatus() == Response::Status::Failed) { SetCreateUserFailData(response, requestID);  return response; }}
 
 	class CreateUserCommand : public IDatabaseCommand {
 	public:
@@ -16,7 +16,9 @@ namespace Database {
 	private:
 		Response::DatabaseResponse ParseToObject(Database::CreateAccount createAccount, TwoNet::Buffer& buffer);
 		unsigned char* HashPassword(std::string rawPassword, std::string salt);
-		unsigned char* GetRandomString(unsigned int length);
+		std::string GetRandomString(unsigned int length);
+		void SetCreateUserFailData(Response::DatabaseResponse& response, long requestID);
+
 	private:
 		AuthenticatorAPI& m_API;
 

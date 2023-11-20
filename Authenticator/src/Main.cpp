@@ -17,6 +17,5 @@ int main() {
 	while (true) {
 		serverManager.Update();
 	}
-
 }
 
