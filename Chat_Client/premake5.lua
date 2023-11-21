@@ -14,8 +14,8 @@ project "Chat_Client"
 	{
 		"src/**.cpp",
 		"src/**.h",
-		"vendor/ProtoBuff/Protos_Build/**.cc",
-		"vendor/ProtoBuff/Protos_Build/**.h"
+		solutionDir .. "Authenticator/vendor/ProtoBuff/Protos_Build/**.cc",
+		solutionDir .. "Authenticator/vendor/ProtoBuff/Protos_Build/**.h"
 	}
 
 	includedirs {
@@ -47,5 +47,9 @@ project "Chat_Client"
 		defines {
 			"TWONET_DEBUG",
 			"TWONET_ASSERT_ENABLED"
+		}
+		
+		links {
+			"libprotobufd.lib"
 		}
 	

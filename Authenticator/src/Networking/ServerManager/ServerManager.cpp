@@ -24,9 +24,11 @@ void Networking::ServerManager::AddCommand(std::string name, Database::IDatabase
 void Networking::ServerManager::OnHandshake(TwoNet::Buffer& buffer, SOCKET socket)
 {
 	m_Sockets.push_back(socket);
+	std::string requestID = TwoNet::TwoProt::DeserializeData(buffer);
 
 	buffer.Clear();
-	std::string welcomeMessage = (char*)true;
+	std::string welcomeMessage = std::to_string(true);
+	TwoNet::TwoProt::SerializeData(buffer, requestID.c_str(), requestID.length());
 	TwoNet::TwoProt::SerializeData(buffer, welcomeMessage.c_str(), welcomeMessage.length());
 	int result = m_Server.SendData(socket, buffer);
 	if (!result) {
@@ -37,11 +39,12 @@ void Networking::ServerManager::OnHandshake(TwoNet::Buffer& buffer, SOCKET socke
 
 void Networking::ServerManager::OnDataReceived(TwoNet::Buffer& buffer, SOCKET socket)
 {
+	std::string requestID = TwoNet::TwoProt::DeserializeData(buffer);
 	std::string command = TwoNet::TwoProt::DeserializeData(buffer);
 	Database::Response::DatabaseResponse response = m_Commands[command]->Execute(buffer);
 	buffer.Clear();
 
-	TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
+	TwoNet::TwoProt::SerializeData(buffer, requestID.c_str(), requestID.length());
 	TwoNet::TwoProt::SerializeData(buffer, response.GetData().c_str(), response.GetData().length());
 
 	int result = m_Server.SendData(socket, buffer);

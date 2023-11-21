@@ -4,6 +4,9 @@
     <Filter Include="Commands">
       <UniqueIdentifier>{17269CB7-03F3-F6C2-2C0C-E56A18382C51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands\AuthenticateUser">
+      <UniqueIdentifier>{440AE3AE-B0CC-1639-F97C-A5C5657EEF16}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Commands\GetMessages">
       <UniqueIdentifier>{5E17A21B-4AA6-2BE5-F3C4-3FE0DF323C8B}</UniqueIdentifier>
     </Filter>
@@ -16,6 +19,9 @@
     <Filter Include="Commands\LeaveRoom">
       <UniqueIdentifier>{30651777-1C49-D8CC-85A9-D21F71ACC24E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands\RegisterClient">
+      <UniqueIdentifier>{6ACC524D-D603-9BE4-DF0D-FF074BC4C1DD}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Commands\SendChat">
       <UniqueIdentifier>{90385458-FC4E-52EE-45C6-DD0FB11B2376}</UniqueIdentifier>
     </Filter>
@@ -24,6 +30,9 @@
     </Filter>
     <Filter Include="Networking">
       <UniqueIdentifier>{6D615D47-5919-9F94-C220-78F0AEF73985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Networking\Client">
+      <UniqueIdentifier>{DB54860C-476B-84A2-90E2-0FC4FC37552A}</UniqueIdentifier>
     </Filter>
     <Filter Include="Networking\DatabaseAPI">
       <UniqueIdentifier>{6B3CFBA9-5736-24FC-40A3-BA0C2C3C8A68}</UniqueIdentifier>
@@ -39,6 +48,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Commands\AuthenticateUser\AuthenticateUserCommand.h">
+      <Filter>Commands\AuthenticateUser</Filter>
+    </ClInclude>
     <ClInclude Include="src\Commands\GetMessages\GetMessagesCommand.h">
       <Filter>Commands\GetMessages</Filter>
     </ClInclude>
@@ -54,6 +66,9 @@
     <ClInclude Include="src\Commands\LeaveRoom\LeaveRoomCommand.h">
       <Filter>Commands\LeaveRoom</Filter>
     </ClInclude>
+    <ClInclude Include="src\Commands\RegisterClient\RegisterClientCommand.h">
+      <Filter>Commands\RegisterClient</Filter>
+    </ClInclude>
     <ClInclude Include="src\Commands\SendChat\SendChatCommand.h">
       <Filter>Commands\SendChat</Filter>
     </ClInclude>
@@ -62,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="src\Debug\Log.h">
       <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Networking\Client\Client.h">
+      <Filter>Networking\Client</Filter>
     </ClInclude>
     <ClInclude Include="src\Networking\DatabaseAPI\DatabaseClient.h">
       <Filter>Networking\DatabaseAPI</Filter>
@@ -79,10 +97,11 @@
       <Filter>Rooms</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\Commands\AuthenticateUser\AuthenticateUserCommand.h" />
-    <ClInclude Include="src\Commands\RegisterClient\RegisterClientCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Commands\AuthenticateUser\AuthenticateUserCommand.cpp">
+      <Filter>Commands\AuthenticateUser</Filter>
+    </ClCompile>
     <ClCompile Include="src\Commands\GetMessages\GetMessagesCommand.cpp">
       <Filter>Commands\GetMessages</Filter>
     </ClCompile>
@@ -94,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="src\Commands\LeaveRoom\LeaveRoomCommand.cpp">
       <Filter>Commands\LeaveRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Commands\RegisterClient\RegisterClientCommand.cpp">
+      <Filter>Commands\RegisterClient</Filter>
     </ClCompile>
     <ClCompile Include="src\Commands\SendChat\SendChatCommand.cpp">
       <Filter>Commands\SendChat</Filter>
@@ -115,7 +137,5 @@
       <Filter>Rooms</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\Commands\AuthenticateUser\AuthenticateUserCommand.cpp" />
-    <ClCompile Include="src\Commands\RegisterClient\RegisterClientCommand.cpp" />
   </ItemGroup>
 </Project>

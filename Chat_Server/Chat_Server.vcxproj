@@ -55,16 +55,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Commands\RegisterClient\RegisterClientCommand.h" />
     <ClInclude Include="src\Commands\AuthenticateUser\AuthenticateUserCommand.h" />
     <ClInclude Include="src\Commands\GetMessages\GetMessagesCommand.h" />
     <ClInclude Include="src\Commands\GetRooms\GetRoomsCommand.h" />
     <ClInclude Include="src\Commands\ICommand.h" />
     <ClInclude Include="src\Commands\JoinRoom\JoinRoomCommand.h" />
     <ClInclude Include="src\Commands\LeaveRoom\LeaveRoomCommand.h" />
+    <ClInclude Include="src\Commands\RegisterClient\RegisterClientCommand.h" />
     <ClInclude Include="src\Commands\SendChat\SendChatCommand.h" />
     <ClInclude Include="src\Debug\Assertion.h" />
     <ClInclude Include="src\Debug\Log.h" />
+    <ClInclude Include="src\Networking\Client\Client.h" />
     <ClInclude Include="src\Networking\DatabaseAPI\DatabaseClient.h" />
     <ClInclude Include="src\Networking\Response\ServerResponse.h" />
     <ClInclude Include="src\Networking\ServerManager\ServerManager.h" />
@@ -73,12 +74,12 @@
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Commands\RegisterClient\RegisterClientCommand.cpp" />
     <ClCompile Include="src\Commands\AuthenticateUser\AuthenticateUserCommand.cpp" />
     <ClCompile Include="src\Commands\GetMessages\GetMessagesCommand.cpp" />
     <ClCompile Include="src\Commands\GetRooms\GetRoomsCommand.cpp" />
     <ClCompile Include="src\Commands\JoinRoom\JoinRoomCommand.cpp" />
     <ClCompile Include="src\Commands\LeaveRoom\LeaveRoomCommand.cpp" />
+    <ClCompile Include="src\Commands\RegisterClient\RegisterClientCommand.cpp" />
     <ClCompile Include="src\Commands\SendChat\SendChatCommand.cpp" />
     <ClCompile Include="src\Debug\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />

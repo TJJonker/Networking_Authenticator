@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "CreatUserCommand.h"
 #include "CreateAccountResponse/CreateAccountResponse.pb.h"
+#include <random>
+#include <sstream>
+#include <iomanip>
 
 namespace Database {
     Response::DatabaseResponse Database::CreateUserCommand::Execute(TwoNet::Buffer& buffer)
@@ -9,58 +12,87 @@ namespace Database {
 
         // Parse to CreateAccound object.
         Database::CreateAccount createAccount;
+
         response = ParseToObject(createAccount, buffer);
         CHECK(response, createAccount.requestid());
+
+        long ri = createAccount.requestid();
+        std::string em = createAccount.email();
+        std::string pw = createAccount.password();
 
         // Check for existing account
         GetUserWithEmailData userData{ createAccount.email() };
         m_API.GetUserWithEmail(userData);
         CHECK(response, createAccount.requestid());
 
-        if (response.GetResult()->next()) {
+        if (response.GetResult() ) {
             response.SetFailureReason(Response::FailureReason::EMAIL_ALREADY_EXISTS);
             CHECK(response, createAccount.requestid());
         }
 
         // Hash password
-        std::string salt = GetRandomString(8);
-        std::string hashedPassword = (char*)HashPassword(createAccount.password(), salt);
+        std::string salt = GetRandomString(64);
+        std::string hashedPassword = HashPassword(createAccount.password(), salt);
 
         // Email, Salt, HashedPassword
-        CreateUserData createUserData {createAccount.email(), salt, hashedPassword };
+        CreateUserData createUserData {createAccount.email(), salt, hashedPassword};
         response = m_API.CreateUser(createUserData);
 
         // Create response
         Database::CreateAccountResponse createUserResponse;
         createUserResponse.set_requestid(createAccount.requestid());
         createUserResponse.set_success(true);
+        createUserResponse.set_failreason(CreateAccountResponse_FailReason_NONE);
 
 
         std::string data;
         createUserResponse.SerializeToString(&data);
         response.SetData(data);
+
+        Database::CreateAccountResponse res;
+        res.ParseFromString(data);
+        long reqi = res.requestid();
+        bool su = res.success();
+        int fr = (int)res.failreason();
+
         return response;
     }
 
-    Response::DatabaseResponse CreateUserCommand::ParseToObject(Database::CreateAccount createAccount, TwoNet::Buffer& buffer)
+    Response::DatabaseResponse CreateUserCommand::ParseToObject(Database::CreateAccount& createAccount, TwoNet::Buffer& buffer)
     {
         const char* rawData = TwoNet::TwoProt::DeserializeData(buffer);
         return ParseTo<Database::CreateAccount>(rawData, createAccount);
     }
 
-    unsigned char* CreateUserCommand::HashPassword(std::string rawPassword, std::string salt)
+    std::string CreateUserCommand::HashPassword(const std::string& rawPassword, const std::string& salt)
     {
         std::string saltedPassword = salt + rawPassword;
-        unsigned char hashedPassword[SHA256_DIGEST_LENGTH];
-        SHA256((unsigned char*)saltedPassword.c_str(), saltedPassword.length(), hashedPassword);
-        return hashedPassword;
+        std::vector<unsigned char> hashedPassword(SHA256_DIGEST_LENGTH);
+        
+        SHA256((const unsigned char*)saltedPassword.c_str(), saltedPassword.length(), hashedPassword.data());
+
+        std::stringstream ss;
+        for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i) {
+            ss << std::hex << std::setw(2) << std::setfill('0') << (int)hashedPassword[i];
+        }
+        return ss.str();
     }
 
     std::string CreateUserCommand::GetRandomString(unsigned int length)
     {
-        std::string string;
-        RAND_bytes((unsigned char*)&string[0], length);
-        return string;
+        static const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+        static std::uniform_int_distribution<> dis(0, sizeof(charset) - 2);
+
+        std::string result;
+        result.reserve(length);
+
+        for (std::size_t i = 0; i < length; ++i) {
+            result += charset[dis(gen)];
+        }
+
+        return result;
     }
 
     void CreateUserCommand::SetCreateUserFailData(Response::DatabaseResponse& response, long requestID)

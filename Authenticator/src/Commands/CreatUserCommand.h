@@ -14,8 +14,8 @@ namespace Database {
 		Response::DatabaseResponse Execute(TwoNet::Buffer& buffer) override;
 
 	private:
-		Response::DatabaseResponse ParseToObject(Database::CreateAccount createAccount, TwoNet::Buffer& buffer);
-		unsigned char* HashPassword(std::string rawPassword, std::string salt);
+		Response::DatabaseResponse ParseToObject(Database::CreateAccount& createAccount, TwoNet::Buffer& buffer);
+		std::string HashPassword(const std::string& rawPassword, const std::string& salt);
 		std::string GetRandomString(unsigned int length);
 		void SetCreateUserFailData(Response::DatabaseResponse& response, long requestID);
 

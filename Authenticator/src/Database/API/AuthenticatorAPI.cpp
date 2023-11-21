@@ -26,7 +26,7 @@ namespace Database {
 		if (response.GetStatus() == Response::Status::Failed)
 			return response;
 
-		static std::string insert2 = "INSERT INTO web_auth(email, salt, hashed_password, userID) VALUES(?, ?, ?, ?);";
+		static std::string insert2 = "INSERT INTO web_auth(email, salt, hashed_password, userId) VALUES(?, ?, ?, ?);";
 		statement = m_Database->PrepareStatement(insert2.c_str());
 		statement->setString(1, processedData.Email);
 		statement->setString(2, processedData.Salt);
@@ -34,7 +34,7 @@ namespace Database {
 		sql::ResultSet* result = response.GetResult();
 		result->next();
 		int i = result->getInt(1);
-		statement->setInt(4, result->getInt(1));
+		statement->setInt(4, i);
 
 		return Update(statement);
 	}
@@ -64,7 +64,12 @@ namespace Database {
 		if (response.GetStatus() != Response::Status::OK)
 			return response;
 
-		(void)statement->executeUpdate();
+		try {
+			statement->executeUpdate();
+		}
+		catch (sql::SQLException& e) {
+			std::cerr << "SQL Exception: " << e.what() << " (SQL State: " << e.getSQLState() << ")" << std::endl;
+		}
 		return response;
 	}
 

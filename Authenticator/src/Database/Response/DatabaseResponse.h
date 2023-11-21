@@ -20,7 +20,7 @@ namespace Database::Response {
 	private:
 		Status m_Status = Status::OK;
 		FailureReason m_Reason = FailureReason::NONE;
-		sql::ResultSet* m_Result;	
-		std::string m_Data;
+		sql::ResultSet* m_Result = nullptr;	
+		std::string m_Data{};
 	};
 }

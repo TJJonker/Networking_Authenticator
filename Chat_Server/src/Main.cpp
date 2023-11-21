@@ -39,6 +39,7 @@ int main() {
 
 	while (true) {
 		serverManager.Update();
+		client.Update();
 	}
 }
 

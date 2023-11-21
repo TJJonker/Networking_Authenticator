@@ -31,6 +31,9 @@ public:
 	bool SendChat(std::string message, ResultCallback callback);
 	bool RequestMessages(ResultCallback callback);
 
+	bool Authenticate(std::string& authenticationData, ResultCallback callback);
+	bool CreateUser(std::string& createUserData, ResultCallback callback);
+
 private:
 	void Submit(TwoNet::Buffer& buffer, BufferCallback callback);
 	void OnDataReceipt(TwoNet::Buffer& buffer);

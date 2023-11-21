@@ -153,6 +153,39 @@ bool Networking::RequestMessages(ResultCallback callback)
     return true;
 }
 
+bool Networking::Authenticate(std::string& authenticationData, ResultCallback callback)
+{
+    TwoNet::Buffer buffer;
+    std::string command = "AUTHENTICATE";
+    TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
+    TwoNet::TwoProt::SerializeData(buffer, authenticationData.c_str(), authenticationData.length());
+
+    Submit(buffer,
+        [&, callback](TwoNet::Buffer& localBuffer) {
+            TwoNet::Networking::NetworkResponse response;
+            response.string = TwoNet::TwoProt::DeserializeData(localBuffer);
+            callback(response);
+        });
+
+    return true;
+}
+
+bool Networking::CreateUser(std::string& createUserData, ResultCallback callback)
+{
+    TwoNet::Buffer buffer;
+    std::string command = "CREATE_USER";
+    TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
+    TwoNet::TwoProt::SerializeData(buffer, createUserData.c_str(), createUserData.length());
+
+    Submit(buffer,
+        [&, callback](TwoNet::Buffer& localBuffer) {
+            TwoNet::Networking::NetworkResponse response;
+            response.string = TwoNet::TwoProt::DeserializeData(localBuffer);
+            callback(response);
+        });
+    return true;
+}
+
 
 void Networking::Submit(TwoNet::Buffer& buffer, BufferCallback callback)
 {

@@ -23,7 +23,15 @@ void DatabaseClient::Destroy()
 
 bool DatabaseClient::Connect()
 {
-    return m_Client->Connect();
+    int result = m_Client->Connect();
+
+    std::string randomFillement = "Random";
+    TwoNet::Buffer buffer;
+    TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
+    TwoNet::TwoProt::SerializeData(buffer, randomFillement.c_str(), randomFillement.length());
+    Submit(buffer, [](TwoNet::Buffer& buffer) {});
+
+    return result;
 }
 
 void DatabaseClient::Update()

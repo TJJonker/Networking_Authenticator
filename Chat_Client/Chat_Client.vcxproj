@@ -50,11 +50,15 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>TwoNet.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>TwoNet.lib;ws2_32.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\Authenticator\vendor\TwoNet\lib\Debug-windows-x86_64;..\Authenticator\vendor\ProtoBuff\Debug-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Authenticator\vendor\ProtoBuff\Protos_Build\Authenticate\Authenticate.pb.h" />
+    <ClInclude Include="..\Authenticator\vendor\ProtoBuff\Protos_Build\AuthenticateResponse\AuthenticateResponse.pb.h" />
+    <ClInclude Include="..\Authenticator\vendor\ProtoBuff\Protos_Build\CreateAccount\CreateAccount.pb.h" />
+    <ClInclude Include="..\Authenticator\vendor\ProtoBuff\Protos_Build\CreateAccountResponse\CreateAccountResponse.pb.h" />
     <ClInclude Include="src\Debug\Assertion.h" />
     <ClInclude Include="src\Debug\Log.h" />
     <ClInclude Include="src\Networking\Networking.h" />
@@ -67,6 +71,10 @@
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Authenticator\vendor\ProtoBuff\Protos_Build\Authenticate\Authenticate.pb.cc" />
+    <ClCompile Include="..\Authenticator\vendor\ProtoBuff\Protos_Build\AuthenticateResponse\AuthenticateResponse.pb.cc" />
+    <ClCompile Include="..\Authenticator\vendor\ProtoBuff\Protos_Build\CreateAccount\CreateAccount.pb.cc" />
+    <ClCompile Include="..\Authenticator\vendor\ProtoBuff\Protos_Build\CreateAccountResponse\CreateAccountResponse.pb.cc" />
     <ClCompile Include="src\Debug\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Networking\Networking.cpp" />
