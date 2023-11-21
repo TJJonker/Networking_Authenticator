@@ -2,21 +2,21 @@
 #include "LeaveRoomCommand.h"
 
 
-Networking::Response::ServerResponse Commands::LeaveRoomCommand::Execute(TwoNet::Buffer& buffer, const Networking::Client& client)
+void Commands::LeaveRoomCommand::Execute(TwoNet::Buffer& buffer, const Networking::Client& client, callback callback)
 {
     Networking::Response::ServerResponse response;
 
     Room* room = m_RoomManager.GetRoomWithClient(client);
     if (!room) {
         response.SetData({ TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::FAILED) });
-        return response;
+        callback(response);
     }
     
     if (!room->RemoveClient(client)) {
         response.SetData({ TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::FAILED) });
-        return response;
+        callback(response);
     }
 
     response.SetData({ TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::SUCCESS) });
-    return response;
+    callback(response);
 }

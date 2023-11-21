@@ -47,17 +47,20 @@ void Networking::ServerManager::OnDataReceived(TwoNet::Buffer& buffer, SOCKET so
 	std::string requestID = TwoNet::TwoProt::DeserializeData(buffer);
 	std::string command = TwoNet::TwoProt::DeserializeData(buffer);
 
-	Networking::Response::ServerResponse response = m_Commands[command]->Execute(buffer, m_Clients[socket]);
-	buffer.Clear();
+	m_Commands[command]->Execute(buffer, m_Clients[socket], 
+		[&](Networking::Response::ServerResponse& response) {
+			buffer.Clear();
 
-	TwoNet::TwoProt::SerializeData(buffer, requestID.c_str(), requestID.length());
-	//TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
-	for(std::string data : response.GetData())
-		TwoNet::TwoProt::SerializeData(buffer, data.c_str(), data.length());
+			TwoNet::TwoProt::SerializeData(buffer, requestID.c_str(), requestID.length());
+			//TwoNet::TwoProt::SerializeData(buffer, command.c_str(), command.length());
+			for (std::string data : response.GetData())
+				TwoNet::TwoProt::SerializeData(buffer, data.c_str(), data.length());
 
-	int result = m_Server.SendData(socket, buffer);
-	if (!result) {
-		TWONET_WARN("Failed to send handshake.");
-		return;
-	}
+			int result = m_Server.SendData(socket, buffer);
+			if (!result) {
+				TWONET_WARN("Failed to send handshake.");
+				return;
+			}
+		});
+	
 }

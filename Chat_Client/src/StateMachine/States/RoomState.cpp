@@ -35,16 +35,7 @@ void RoomState::GetUserInput()
 					continue;
 
 				if (input == "E") {
-					m_Networking->LeaveRoom([&](TwoNet::Networking::NetworkResponse response)
-						{
-							if (response.string == TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::SUCCESS)) { 
-								m_ChangeState = true;
-							}
-							else {
-								TWONET_LOG_ERROR("Error while leaving the room. Please restart the application.");
-							}
-						}
-					);
+					m_ChangeState = true;
 				} 
 				else {
 					m_Networking->SendChat(input, [&](TwoNet::Networking::NetworkResponse response) {
@@ -77,8 +68,20 @@ void RoomState::RetrieveMessages()
 					}
 				}
 
-				if(m_ChangeState)
-					m_StateManager->ChangeState(StateManager::AppState::LOBBY);
+				if (m_ChangeState) {					
+					m_Networking->LeaveRoom([&](TwoNet::Networking::NetworkResponse response)
+						{
+							if (response.string == TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::SUCCESS)) {
+								m_StateManager->ChangeState(StateManager::AppState::LOBBY);
+							}
+							else {
+								TWONET_LOG_ERROR("Error while leaving the room. Please restart the application.");
+								m_ChangeState = false;
+								RetrieveMessages();
+							}
+						}
+					);
+				}
 				else 
 					RetrieveMessages();
 			}

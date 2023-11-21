@@ -5,7 +5,8 @@
 
 namespace Commands {
 	struct ICommand {
-		virtual Networking::Response::ServerResponse Execute(TwoNet::Buffer& buffer, const Networking::Client& client) = 0;
+		using callback = std::function<void(Networking::Response::ServerResponse& response)>;
+		virtual void Execute(TwoNet::Buffer& buffer, const Networking::Client& client, callback callback) = 0;
 	};
 
 	template<typename T>

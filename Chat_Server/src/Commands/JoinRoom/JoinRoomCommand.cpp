@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "JoinRoomCommand.h"
 
-Networking::Response::ServerResponse Commands::JoinRoomCommand::Execute(TwoNet::Buffer& buffer, const Networking::Client& client)
+void Commands::JoinRoomCommand::Execute(TwoNet::Buffer& buffer, const Networking::Client& client, callback callback)
 {
     Networking::Response::ServerResponse response;
     std::string roomName = TwoNet::TwoProt::DeserializeData(buffer);
@@ -12,5 +12,5 @@ Networking::Response::ServerResponse Commands::JoinRoomCommand::Execute(TwoNet::
     else
         response.SetData({ TwoNet::Utils::ResponseToString(TwoNet::Utils::Response::FAILED) });
 
-    return response;
+    callback(response);
 }

@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "GetRoomsCommand.h"
 
-Networking::Response::ServerResponse Commands::GetRoomsCommand::Execute(TwoNet::Buffer& buffer, const Networking::Client& client)
+void Commands::GetRoomsCommand::Execute(TwoNet::Buffer& buffer, const Networking::Client& client, callback callback)
 {
 	Networking::Response::ServerResponse response;
 	response.SetData(m_RoomManager.GetRoomNames());
-	return response;
+	callback(response);
 }

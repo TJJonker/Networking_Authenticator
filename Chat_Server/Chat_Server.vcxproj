@@ -40,7 +40,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TWONET_DEBUG;TWONET_ASSERT_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;..\Authenticator\vendor\TwoNet\include;..\Authenticator\vendor\SPDLOG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;..\Authenticator\vendor\TwoNet\include;..\Authenticator\vendor\SPDLOG\include;..\Authenticator\vendor\ProtoBuff\Debug-windows-x86_64\include;..\Authenticator\vendor\ProtoBuff\Protos_Build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -51,10 +51,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>TwoNet.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Authenticator\vendor\TwoNet\lib\Debug-windows-x86_64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Authenticator\vendor\TwoNet\lib\Debug-windows-x86_64;..\Authenticator\vendor\ProtoBuff\Debug-windows-x86_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Commands\RegisterClient\RegisterClientCommand.h" />
+    <ClInclude Include="src\Commands\AuthenticateUser\AuthenticateUserCommand.h" />
     <ClInclude Include="src\Commands\GetMessages\GetMessagesCommand.h" />
     <ClInclude Include="src\Commands\GetRooms\GetRoomsCommand.h" />
     <ClInclude Include="src\Commands\ICommand.h" />
@@ -63,7 +65,7 @@
     <ClInclude Include="src\Commands\SendChat\SendChatCommand.h" />
     <ClInclude Include="src\Debug\Assertion.h" />
     <ClInclude Include="src\Debug\Log.h" />
-    <ClInclude Include="src\Networking\Client\Client.h" />
+    <ClInclude Include="src\Networking\DatabaseAPI\DatabaseClient.h" />
     <ClInclude Include="src\Networking\Response\ServerResponse.h" />
     <ClInclude Include="src\Networking\ServerManager\ServerManager.h" />
     <ClInclude Include="src\Rooms\Room.h" />
@@ -71,6 +73,8 @@
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Commands\RegisterClient\RegisterClientCommand.cpp" />
+    <ClCompile Include="src\Commands\AuthenticateUser\AuthenticateUserCommand.cpp" />
     <ClCompile Include="src\Commands\GetMessages\GetMessagesCommand.cpp" />
     <ClCompile Include="src\Commands\GetRooms\GetRoomsCommand.cpp" />
     <ClCompile Include="src\Commands\JoinRoom\JoinRoomCommand.cpp" />
@@ -78,6 +82,7 @@
     <ClCompile Include="src\Commands\SendChat\SendChatCommand.cpp" />
     <ClCompile Include="src\Debug\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Networking\DatabaseAPI\DatabaseClient.cpp" />
     <ClCompile Include="src\Networking\ServerManager\ServerManager.cpp" />
     <ClCompile Include="src\Rooms\Room.cpp" />
     <ClCompile Include="src\Rooms\RoomManager.cpp" />

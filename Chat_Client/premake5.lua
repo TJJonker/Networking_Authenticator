@@ -13,17 +13,22 @@ project "Chat_Client"
 	files
 	{
 		"src/**.cpp",
-		"src/**.h"
+		"src/**.h",
+		"vendor/ProtoBuff/Protos_Build/**.cc",
+		"vendor/ProtoBuff/Protos_Build/**.h"
 	}
 
 	includedirs {
 		"src",
 		solutionDir .. "%{includeDirs.TWONET}",
-		solutionDir .. "%{includeDirs.SPDLOG}"
+		solutionDir .. "%{includeDirs.SPDLOG}",
+		solutionDir .. "%{includeDirs.PROTOBUFF}",
+		solutionDir .. "%{includeDirs.PROTOS}"
 	}
 
 	libdirs {
-		solutionDir .. "%{libraryDirs.TWONET}"
+		solutionDir .. "%{libraryDirs.TWONET}",
+		solutionDir .. "%{libraryDirs.PROTOBUFF}"
 	}
 
 	links {

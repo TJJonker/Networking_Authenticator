@@ -10,7 +10,7 @@ namespace Commands {
 		LeaveRoomCommand(RoomManager& roomManager)
 			:m_RoomManager(roomManager) { }
 
-		Networking::Response::ServerResponse Execute(TwoNet::Buffer& buffer, const Networking::Client& client) override;
+		void Execute(TwoNet::Buffer& buffer, const Networking::Client& client, callback callback) override;
 
 	private:
 		RoomManager& m_RoomManager;
