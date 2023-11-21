@@ -54,7 +54,7 @@ namespace Database {
 		return response;
 	}
 
-	Response::DatabaseResponse AuthenticateUserCommand::ParseToObject(Database::Authenticate authenticate, TwoNet::Buffer& buffer)
+	Response::DatabaseResponse AuthenticateUserCommand::ParseToObject(Database::Authenticate& authenticate, TwoNet::Buffer& buffer)
 	{
 		const char* rawData = TwoNet::TwoProt::DeserializeData(buffer);
 		return ParseTo<Database::Authenticate>(rawData, authenticate);

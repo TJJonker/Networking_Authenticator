@@ -164,7 +164,8 @@ bool Networking::Authenticate(std::string& authenticationData, ResultCallback ca
         [&, callback](TwoNet::Buffer& localBuffer) {
             TwoNet::Networking::NetworkResponse response;
             response.string = TwoNet::TwoProt::DeserializeData(localBuffer);
-
+            if (response.string[7] == -3)
+                response.string[7] = 0;
             callback(response);
         });
 
