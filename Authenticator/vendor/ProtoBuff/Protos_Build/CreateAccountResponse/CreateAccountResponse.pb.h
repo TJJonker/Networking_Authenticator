@@ -65,9 +65,9 @@ PROTOBUF_NAMESPACE_CLOSE
 namespace Database {
 
 enum CreateAccountResponse_FailReason : int {
-  CreateAccountResponse_FailReason_NONE = 0,
-  CreateAccountResponse_FailReason_ACCOUNT_ALREADY_EXISTS = 1,
-  CreateAccountResponse_FailReason_INTERNAL_SERVER_ERROR = 2
+  CreateAccountResponse_FailReason_NONE = 1,
+  CreateAccountResponse_FailReason_ACCOUNT_ALREADY_EXISTS = 2,
+  CreateAccountResponse_FailReason_INTERNAL_SERVER_ERROR = 3
 };
 bool CreateAccountResponse_FailReason_IsValid(int value);
 constexpr CreateAccountResponse_FailReason CreateAccountResponse_FailReason_FailReason_MIN = CreateAccountResponse_FailReason_NONE;
@@ -249,9 +249,9 @@ class CreateAccountResponse final :
 
   enum : int {
     kRequestIDFieldNumber = 1,
-    kSuccessFieldNumber = 2,
-    kUserIDFieldNumber = 3,
-    kFailReasonFieldNumber = 4,
+    kUserIDFieldNumber = 2,
+    kSuccessFieldNumber = 4,
+    kFailReasonFieldNumber = 3,
   };
   // required int32 requestID = 1;
   bool has_requestid() const;
@@ -266,20 +266,7 @@ class CreateAccountResponse final :
   void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // required bool success = 2;
-  bool has_success() const;
-  private:
-  bool _internal_has_success() const;
-  public:
-  void clear_success();
-  bool success() const;
-  void set_success(bool value);
-  private:
-  bool _internal_success() const;
-  void _internal_set_success(bool value);
-  public:
-
-  // optional int32 userID = 3;
+  // optional int32 userID = 2;
   bool has_userid() const;
   private:
   bool _internal_has_userid() const;
@@ -292,7 +279,20 @@ class CreateAccountResponse final :
   void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // required .Database.CreateAccountResponse.FailReason failReason = 4;
+  // required bool success = 4;
+  bool has_success() const;
+  private:
+  bool _internal_has_success() const;
+  public:
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // required .Database.CreateAccountResponse.FailReason failReason = 3;
   bool has_failreason() const;
   private:
   bool _internal_has_failreason() const;
@@ -318,8 +318,8 @@ class CreateAccountResponse final :
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
-  bool success_;
   ::PROTOBUF_NAMESPACE_ID::int32 userid_;
+  bool success_;
   int failreason_;
   friend struct ::TableStruct_CreateAccountResponse_2eproto;
 };
@@ -362,37 +362,9 @@ inline void CreateAccountResponse::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 
   // @@protoc_insertion_point(field_set:Database.CreateAccountResponse.requestID)
 }
 
-// required bool success = 2;
-inline bool CreateAccountResponse::_internal_has_success() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool CreateAccountResponse::has_success() const {
-  return _internal_has_success();
-}
-inline void CreateAccountResponse::clear_success() {
-  success_ = false;
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline bool CreateAccountResponse::_internal_success() const {
-  return success_;
-}
-inline bool CreateAccountResponse::success() const {
-  // @@protoc_insertion_point(field_get:Database.CreateAccountResponse.success)
-  return _internal_success();
-}
-inline void CreateAccountResponse::_internal_set_success(bool value) {
-  _has_bits_[0] |= 0x00000002u;
-  success_ = value;
-}
-inline void CreateAccountResponse::set_success(bool value) {
-  _internal_set_success(value);
-  // @@protoc_insertion_point(field_set:Database.CreateAccountResponse.success)
-}
-
-// optional int32 userID = 3;
+// optional int32 userID = 2;
 inline bool CreateAccountResponse::_internal_has_userid() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline bool CreateAccountResponse::has_userid() const {
@@ -400,7 +372,7 @@ inline bool CreateAccountResponse::has_userid() const {
 }
 inline void CreateAccountResponse::clear_userid() {
   userid_ = 0;
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountResponse::_internal_userid() const {
   return userid_;
@@ -410,7 +382,7 @@ inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountResponse::userid() const {
   return _internal_userid();
 }
 inline void CreateAccountResponse::_internal_set_userid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
   userid_ = value;
 }
 inline void CreateAccountResponse::set_userid(::PROTOBUF_NAMESPACE_ID::int32 value) {
@@ -418,7 +390,7 @@ inline void CreateAccountResponse::set_userid(::PROTOBUF_NAMESPACE_ID::int32 val
   // @@protoc_insertion_point(field_set:Database.CreateAccountResponse.userID)
 }
 
-// required .Database.CreateAccountResponse.FailReason failReason = 4;
+// required .Database.CreateAccountResponse.FailReason failReason = 3;
 inline bool CreateAccountResponse::_internal_has_failreason() const {
   bool value = (_has_bits_[0] & 0x00000008u) != 0;
   return value;
@@ -427,7 +399,7 @@ inline bool CreateAccountResponse::has_failreason() const {
   return _internal_has_failreason();
 }
 inline void CreateAccountResponse::clear_failreason() {
-  failreason_ = 0;
+  failreason_ = 1;
   _has_bits_[0] &= ~0x00000008u;
 }
 inline ::Database::CreateAccountResponse_FailReason CreateAccountResponse::_internal_failreason() const {
@@ -445,6 +417,34 @@ inline void CreateAccountResponse::_internal_set_failreason(::Database::CreateAc
 inline void CreateAccountResponse::set_failreason(::Database::CreateAccountResponse_FailReason value) {
   _internal_set_failreason(value);
   // @@protoc_insertion_point(field_set:Database.CreateAccountResponse.failReason)
+}
+
+// required bool success = 4;
+inline bool CreateAccountResponse::_internal_has_success() const {
+  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool CreateAccountResponse::has_success() const {
+  return _internal_has_success();
+}
+inline void CreateAccountResponse::clear_success() {
+  success_ = false;
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline bool CreateAccountResponse::_internal_success() const {
+  return success_;
+}
+inline bool CreateAccountResponse::success() const {
+  // @@protoc_insertion_point(field_get:Database.CreateAccountResponse.success)
+  return _internal_success();
+}
+inline void CreateAccountResponse::_internal_set_success(bool value) {
+  _has_bits_[0] |= 0x00000004u;
+  success_ = value;
+}
+inline void CreateAccountResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:Database.CreateAccountResponse.success)
 }
 
 #ifdef __GNUC__

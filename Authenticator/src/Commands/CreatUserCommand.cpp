@@ -22,10 +22,10 @@ namespace Database {
 
         // Check for existing account
         GetUserWithEmailData userData{ createAccount.email() };
-        m_API.GetUserWithEmail(userData);
+        response = m_API.GetUserWithEmail(userData);
         CHECK(response, createAccount.requestid());
 
-        if (response.GetResult() ) {
+        if (response.GetResult()->next() ) {
             response.SetFailureReason(Response::FailureReason::EMAIL_ALREADY_EXISTS);
             CHECK(response, createAccount.requestid());
         }
@@ -40,7 +40,7 @@ namespace Database {
 
         // Create response
         Database::CreateAccountResponse createUserResponse;
-        createUserResponse.set_requestid(createAccount.requestid());
+        createUserResponse.set_requestid(1);
         createUserResponse.set_success(true);
         createUserResponse.set_failreason(CreateAccountResponse_FailReason_NONE);
 
@@ -48,12 +48,6 @@ namespace Database {
         std::string data;
         createUserResponse.SerializeToString(&data);
         response.SetData(data);
-
-        Database::CreateAccountResponse res;
-        res.ParseFromString(data);
-        long reqi = res.requestid();
-        bool su = res.success();
-        int fr = (int)res.failreason();
 
         return response;
     }
@@ -110,7 +104,8 @@ namespace Database {
 
         // Create response object
         Database::CreateAccountResponse responseData;
-        responseData.set_requestid(requestID);
+        responseData.set_requestid(1);
+        responseData.set_userid(1);
         responseData.set_success(false);
         responseData.set_failreason(reason);
 

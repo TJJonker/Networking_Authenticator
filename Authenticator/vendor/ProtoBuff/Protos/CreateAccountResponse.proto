@@ -4,14 +4,14 @@ package Database;
 
 message CreateAccountResponse {
 	required int32 requestID = 1;
-	required bool success = 2;
-	optional int32 userID = 3;
+	optional int32 userID = 2;
 	
 	enum FailReason {
-		NONE = 0;
-		ACCOUNT_ALREADY_EXISTS = 1;
-		INTERNAL_SERVER_ERROR = 2;
+		NONE = 1;
+		ACCOUNT_ALREADY_EXISTS = 2;
+		INTERNAL_SERVER_ERROR = 3;
 	}
 
-	required FailReason failReason = 4;
+	required FailReason failReason = 3;
+	required bool success = 4;
 }

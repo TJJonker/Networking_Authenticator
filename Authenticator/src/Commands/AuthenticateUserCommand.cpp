@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "AuthenticateUserCommand.h"
 #include <AuthenticateResponse/AuthenticateResponse.pb.h>
+#include <sstream>
+#include <iomanip>
 
 namespace Database {
 	Response::DatabaseResponse Database::AuthenticateUserCommand::Execute(TwoNet::Buffer& buffer)
@@ -27,10 +29,10 @@ namespace Database {
 		sql::ResultSet* result = response.GetResult();
 
 		// Hash password
-		unsigned char* hashedPassword = HashPassword(authenticate.password(), result->getString(4).c_str()).data();
-
+		std::string hashedPassword = HashPassword(authenticate.password(), result->getString(4).c_str()).data();
+		std::string databasePassword = result->getString(5).c_str();
 		// Compare password
-		int compareResult = hashedPassword == (unsigned char*) result->getString(5).c_str();
+		int compareResult = hashedPassword == databasePassword;
 
 		// Return data
 		if (!compareResult) {
@@ -39,9 +41,11 @@ namespace Database {
 		}
 
 		Database::AuthenticateResponse authenticationResponse;
-		authenticationResponse.set_requestid(authenticate.requestid());
+		authenticationResponse.set_requestid(1);
+		authenticationResponse.set_userid(1);
 		authenticationResponse.set_success(true);
 		authenticationResponse.set_creationdate(result->getString(2));
+		authenticationResponse.set_failreason(AuthenticateResponse_FailReason_NONE);
 
 		std::string data;
 		authenticationResponse.SerializeToString(&data);
@@ -56,12 +60,18 @@ namespace Database {
 		return ParseTo<Database::Authenticate>(rawData, authenticate);
 	}
 
-	std::vector<unsigned char> AuthenticateUserCommand::HashPassword(std::string rawPassword, std::string salt)
+	std::string AuthenticateUserCommand::HashPassword(std::string rawPassword, std::string salt)
 	{
 		std::string saltedPassword = salt + rawPassword;
 		std::vector<unsigned char> hashedPassword(SHA256_DIGEST_LENGTH);
-		SHA256((unsigned char*)saltedPassword.c_str(), saltedPassword.length(), hashedPassword.data());
-		return hashedPassword;
+
+		SHA256((const unsigned char*)saltedPassword.c_str(), saltedPassword.length(), hashedPassword.data());
+
+		std::stringstream ss;
+		for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i) {
+			ss << std::hex << std::setw(2) << std::setfill('0') << (int)hashedPassword[i];
+		}
+		return ss.str();
 	}
 
 	void AuthenticateUserCommand::SetCreateUserFailData(Response::DatabaseResponse& response, long requestID)
@@ -79,7 +89,8 @@ namespace Database {
 
 		// Create response object
 		Database::AuthenticateResponse responseData;
-		responseData.set_requestid(requestID);
+		responseData.set_requestid(1);
+		responseData.set_userid(1);
 		responseData.set_success(false);
 		responseData.set_failreason(reason);
 

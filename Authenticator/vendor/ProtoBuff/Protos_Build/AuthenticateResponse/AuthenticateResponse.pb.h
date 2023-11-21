@@ -65,9 +65,9 @@ PROTOBUF_NAMESPACE_CLOSE
 namespace Database {
 
 enum AuthenticateResponse_FailReason : int {
-  AuthenticateResponse_FailReason_NONE = 0,
-  AuthenticateResponse_FailReason_INVALID_CREDENTIALS = 1,
-  AuthenticateResponse_FailReason_INTERNAL_SERVER_ERROR = 2
+  AuthenticateResponse_FailReason_NONE = 1,
+  AuthenticateResponse_FailReason_INVALID_CREDENTIALS = 2,
+  AuthenticateResponse_FailReason_INTERNAL_SERVER_ERROR = 3
 };
 bool AuthenticateResponse_FailReason_IsValid(int value);
 constexpr AuthenticateResponse_FailReason AuthenticateResponse_FailReason_FailReason_MIN = AuthenticateResponse_FailReason_NONE;
@@ -251,8 +251,8 @@ class AuthenticateResponse final :
     kCreationDateFieldNumber = 3,
     kRequestIDFieldNumber = 1,
     kUserIDFieldNumber = 2,
-    kSuccessFieldNumber = 4,
-    kFailReasonFieldNumber = 5,
+    kSuccessFieldNumber = 5,
+    kFailReasonFieldNumber = 4,
   };
   // optional string creationDate = 3;
   bool has_creationdate() const;
@@ -298,7 +298,7 @@ class AuthenticateResponse final :
   void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // required bool success = 4;
+  // required bool success = 5;
   bool has_success() const;
   private:
   bool _internal_has_success() const;
@@ -311,7 +311,7 @@ class AuthenticateResponse final :
   void _internal_set_success(bool value);
   public:
 
-  // required .Database.AuthenticateResponse.FailReason failReason = 5;
+  // required .Database.AuthenticateResponse.FailReason failReason = 4;
   bool has_failreason() const;
   private:
   bool _internal_has_failreason() const;
@@ -410,6 +410,63 @@ inline void AuthenticateResponse::set_userid(::PROTOBUF_NAMESPACE_ID::int32 valu
   // @@protoc_insertion_point(field_set:Database.AuthenticateResponse.userID)
 }
 
+// required .Database.AuthenticateResponse.FailReason failReason = 4;
+inline bool AuthenticateResponse::_internal_has_failreason() const {
+  bool value = (_has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline bool AuthenticateResponse::has_failreason() const {
+  return _internal_has_failreason();
+}
+inline void AuthenticateResponse::clear_failreason() {
+  failreason_ = 1;
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline ::Database::AuthenticateResponse_FailReason AuthenticateResponse::_internal_failreason() const {
+  return static_cast< ::Database::AuthenticateResponse_FailReason >(failreason_);
+}
+inline ::Database::AuthenticateResponse_FailReason AuthenticateResponse::failreason() const {
+  // @@protoc_insertion_point(field_get:Database.AuthenticateResponse.failReason)
+  return _internal_failreason();
+}
+inline void AuthenticateResponse::_internal_set_failreason(::Database::AuthenticateResponse_FailReason value) {
+  assert(::Database::AuthenticateResponse_FailReason_IsValid(value));
+  _has_bits_[0] |= 0x00000010u;
+  failreason_ = value;
+}
+inline void AuthenticateResponse::set_failreason(::Database::AuthenticateResponse_FailReason value) {
+  _internal_set_failreason(value);
+  // @@protoc_insertion_point(field_set:Database.AuthenticateResponse.failReason)
+}
+
+// required bool success = 5;
+inline bool AuthenticateResponse::_internal_has_success() const {
+  bool value = (_has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline bool AuthenticateResponse::has_success() const {
+  return _internal_has_success();
+}
+inline void AuthenticateResponse::clear_success() {
+  success_ = false;
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline bool AuthenticateResponse::_internal_success() const {
+  return success_;
+}
+inline bool AuthenticateResponse::success() const {
+  // @@protoc_insertion_point(field_get:Database.AuthenticateResponse.success)
+  return _internal_success();
+}
+inline void AuthenticateResponse::_internal_set_success(bool value) {
+  _has_bits_[0] |= 0x00000008u;
+  success_ = value;
+}
+inline void AuthenticateResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:Database.AuthenticateResponse.success)
+}
+
 // optional string creationDate = 3;
 inline bool AuthenticateResponse::_internal_has_creationdate() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
@@ -466,63 +523,6 @@ inline void AuthenticateResponse::set_allocated_creationdate(std::string* creati
   creationdate_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), creationdate,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:Database.AuthenticateResponse.creationDate)
-}
-
-// required bool success = 4;
-inline bool AuthenticateResponse::_internal_has_success() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool AuthenticateResponse::has_success() const {
-  return _internal_has_success();
-}
-inline void AuthenticateResponse::clear_success() {
-  success_ = false;
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline bool AuthenticateResponse::_internal_success() const {
-  return success_;
-}
-inline bool AuthenticateResponse::success() const {
-  // @@protoc_insertion_point(field_get:Database.AuthenticateResponse.success)
-  return _internal_success();
-}
-inline void AuthenticateResponse::_internal_set_success(bool value) {
-  _has_bits_[0] |= 0x00000008u;
-  success_ = value;
-}
-inline void AuthenticateResponse::set_success(bool value) {
-  _internal_set_success(value);
-  // @@protoc_insertion_point(field_set:Database.AuthenticateResponse.success)
-}
-
-// required .Database.AuthenticateResponse.FailReason failReason = 5;
-inline bool AuthenticateResponse::_internal_has_failreason() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool AuthenticateResponse::has_failreason() const {
-  return _internal_has_failreason();
-}
-inline void AuthenticateResponse::clear_failreason() {
-  failreason_ = 0;
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline ::Database::AuthenticateResponse_FailReason AuthenticateResponse::_internal_failreason() const {
-  return static_cast< ::Database::AuthenticateResponse_FailReason >(failreason_);
-}
-inline ::Database::AuthenticateResponse_FailReason AuthenticateResponse::failreason() const {
-  // @@protoc_insertion_point(field_get:Database.AuthenticateResponse.failReason)
-  return _internal_failreason();
-}
-inline void AuthenticateResponse::_internal_set_failreason(::Database::AuthenticateResponse_FailReason value) {
-  assert(::Database::AuthenticateResponse_FailReason_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
-  failreason_ = value;
-}
-inline void AuthenticateResponse::set_failreason(::Database::AuthenticateResponse_FailReason value) {
-  _internal_set_failreason(value);
-  // @@protoc_insertion_point(field_set:Database.AuthenticateResponse.failReason)
 }
 
 #ifdef __GNUC__
