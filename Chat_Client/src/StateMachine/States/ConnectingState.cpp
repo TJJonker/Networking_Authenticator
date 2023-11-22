@@ -67,7 +67,7 @@ void ConnectingState::Login()
 			response.ParseFromString(localResponse.string);
 
 			if (response.success()) {
-				LOG_WARNING("Authentication successful!");
+				LOG_WARNING("Authentication successful! Account created on {0}", response.creationdate().c_str());
 				m_StateManager->ChangeState(StateManager::AppState::LOBBY);
 			}
 			else {
@@ -105,7 +105,7 @@ void ConnectingState::Register()
 			response.ParseFromString(localResponse.string);
 
 			if (response.success()) {
-				LOG_WARNING("Authentication successful!");
+				LOG_WARNING("Registration successful!");
 				m_StateManager->ChangeState(StateManager::AppState::LOBBY);
 			}
 			else {
